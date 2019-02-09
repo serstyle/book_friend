@@ -24,9 +24,6 @@ import { setSearchChange, onSubmitBook } from './actions'
 
 
 class App extends Component {
-  state = {
-    bookList: '',
-  }
 
   // componentDidMount() {
   //   fetch("https://www.googleapis.com/books/v1/volumes?q=harry+potter")
@@ -40,11 +37,7 @@ class App extends Component {
 
   onSubmit = (e) =>{
     e.preventDefault()
-    fetch("https://www.googleapis.com/books/v1/volumes?q=" + this.props.input)
-    .then(res => res.json())
-    .then(data => {
-      console.log(data.items)
-      this.setState({bookList: data.items})})
+    this.props.onSubmitBook()
   }
 
 
@@ -55,8 +48,8 @@ class App extends Component {
         <div className='container'>
           <h1>book Friend </h1>
           <Search onSearchChange={this.props.onSearchChange} onSubmit={this.onSubmit}/>
-          {this.state.bookList?
-                    <BookList booklist={this.state.bookList} />
+          {this.props.bookList?
+                    <BookList booklist={this.props.bookList} />
                     :
                     <p> Welcome on BookFRIENDS </p>}
         </div>

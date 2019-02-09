@@ -6,9 +6,6 @@ import { ON_SEARCH_CHANGE,
 
 const initialStateSearch = {
 	input:'',
-	bookList:'',
-	isPending: false,
-	error: ''
 }
 
 
@@ -28,7 +25,7 @@ const initialStateBook = {
 	error: ''
 }
 
-export const onSubmitBook = (state=initialStateSearch, action={})=>{
+export const onSubmitBook = (state=initialStateBook, action={})=>{
 	switch(action.type){
 		case REQUEST_BOOK_PENDING:
 			return Object.assign({}, state, {isPending:true })

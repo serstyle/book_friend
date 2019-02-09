@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
-import BookList from './BookList'
-import Search from './Search'
-import Navbar from './Navbar'
+import Navbar from './components/Navbar'
+import Signin from './components/Signin'
+import Home from './components/Home'
 import { setSearchChange, onSubmitBook } from './actions'
 
 
@@ -25,15 +26,6 @@ import { setSearchChange, onSubmitBook } from './actions'
 
 class App extends Component {
 
-  // componentDidMount() {
-  //   fetch("https://www.googleapis.com/books/v1/volumes?q=harry+potter")
-  //   .then(res => res.json())
-  //   .then(data => {
-  //     console.log(data.items)
-  //     this.setState({bookList: data.items})})
-  // }
-
-
 
   onSubmit = (e) =>{
     e.preventDefault()
@@ -43,17 +35,15 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <Navbar />
-        <div className='container'>
-          <h1>book Friend </h1>
-          <Search onSearchChange={this.props.onSearchChange} onSubmit={this.onSubmit}/>
-          {this.props.bookList?
-                    <BookList booklist={this.props.bookList} />
-                    :
-                    <p> Welcome on BookFRIENDS </p>}
+      <BrowserRouter>
+        <div>
+          <Navbar />
+            <Switch className='container'>
+              <Route exact path='/' render={(props) => <Home {...props} onSubmit={this.onSubmit}  />} />
+              <Route path='/signin' render={(props) => <Signin {...props} onSubmit={this.onSubmit}  />} />
+            </Switch>
         </div>
-      </div>
+      </BrowserRouter> 
     );
   }
 }

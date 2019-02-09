@@ -11,7 +11,7 @@ const Book = ({ title, authors, image, description }) =>{
 			      </div>
 			      <div class="card-stacked">
 			        <div class="card-content">
-			          <h5>{title}</h5>
+			          <h5>{title.length > 20 ? title.substring(0, 20) + '...' : title}</h5>
 			          <p>author: {authors}</p>
 			        </div>
 			        <div class="card-action">

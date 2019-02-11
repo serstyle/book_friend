@@ -13,7 +13,6 @@ export const setSearchChange = (text) =>({
 
 export const onSubmitBook = () => (dispatch, getState) => {
 	dispatch({type:REQUEST_BOOK_PENDING})
-
 	fetch("https://www.googleapis.com/books/v1/volumes?q=" + getState().searchChange.input) //getstate to take a state from an other reducer
     .then(res => res.json())
     .then(data => dispatch({type:REQUEST_BOOK_SUCCESS, payload:data.items}))

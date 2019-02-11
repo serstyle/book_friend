@@ -1,9 +1,20 @@
 import React from 'react'
 import Book from './Book'
+import {connect} from 'react-redux'
 
-const BookList = ({ booklist }) =>{
-	const books = booklist[0].id.length?
-		booklist.map (book =>{
+ const mapStateToProps = state =>{
+    return{
+    	bookList: state.onSubmitBook.bookList,
+		isPending: state.onSubmitBook.isPending,
+		error: state.onSubmitBook.error
+    }
+}
+
+
+class BookList extends React.Component{
+	render(){
+	const books = this.props.bookList[0].id.length?
+		this.props.bookList.map (book =>{
 			return(<Book
 				 key={book.id} 
 				 title={book.volumeInfo.title}
@@ -15,10 +26,11 @@ const BookList = ({ booklist }) =>{
 		:
 		<div>load</div>
 	return(
-		<div className='row'>
+		<div className='row container'>
 			{books}
 		</div>
 		)
+	}
 }
 
-export default BookList;
+export default connect(mapStateToProps)(BookList);

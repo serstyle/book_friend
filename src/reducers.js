@@ -10,6 +10,7 @@ const initialStateSearch = {
 
 
 export const searchChange = (state=initialStateSearch, action={}) =>{
+	console.log(action)
 	switch(action.type){
 		case ON_SEARCH_CHANGE:
 			return Object.assign({}, state, {input:action.payload})

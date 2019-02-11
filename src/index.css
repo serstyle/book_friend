@@ -20,12 +20,32 @@ code {
 
 }
 
-.card.horizontal {
-    height: 20rem;
-}
-
 
 .card .card-action {
     display: flex;
     justify-content: space-around;
+}
+
+
+.card.horizontal {
+    height: 20rem;
+    width: 25rem;
+    margin: 1rem;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.character-counter {
+    min-height: 18px;
+    display: none;
+}
+
+@media only screen and (min-width: 993px){
+  .container {
+    width: 85%;
+  }
 }

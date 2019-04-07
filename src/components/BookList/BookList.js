@@ -1,18 +1,19 @@
 import React from 'react'
-import Book from './Book'
+import Book from '../Book/Book'
 import {connect} from 'react-redux'
 
  const mapStateToProps = state =>{
     return{
     	bookList: state.onSubmitBook.bookList,
-		isPending: state.onSubmitBook.isPending,
-		error: state.onSubmitBook.error
+			isPending: state.onSubmitBook.isPending,
+			error: state.onSubmitBook.error
     }
 }
 
 
 class BookList extends React.Component{
 	render(){
+	console.log(this.props.bookList)
 	const books = this.props.bookList[0].id.length?
 		this.props.bookList.map (book =>{
 			return(<Book

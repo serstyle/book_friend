@@ -2,7 +2,7 @@ import { ON_SEARCH_CHANGE,
 	REQUEST_BOOK_PENDING, 
 	REQUEST_BOOK_SUCCESS, 
 	REQUEST_BOOK_FAILED 
-} from './constants'
+} from '../constants'
 
 const initialStateSearch = {
 	input:'',
@@ -34,6 +34,8 @@ export const onSubmitBook = (state=initialStateBook, action={})=>{
 			return Object.assign({}, state, {bookList:action.payload, isPending:false})
 		case REQUEST_BOOK_FAILED:
 			return Object.assign({}, state, {error:action.payload, isPending:false})
+		case 'ON_RESET_BOOK':
+			return {...state, bookList:''}
 		default:
 		return state
 	}

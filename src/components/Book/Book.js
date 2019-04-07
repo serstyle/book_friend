@@ -15,7 +15,7 @@ const Book = ({ title, authors, image, description }) =>{
 			          <p>author: {authors}</p>
 			        </div>
 			        <div className="card-action">
-			          <a className="btn-floating waves-effect waves-light red"><i className="material-icons">add</i></a>
+			          <button className="btn-floating waves-effect waves-light red"><i className="material-icons">add</i></button>
 			          <Modal
 						  header={title}
 						  trigger={<Button>ABOUT</Button>}>

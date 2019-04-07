@@ -1,3 +1,19 @@
+/* body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Work Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: url(/static/media/background.1b21d2c9.jpg)no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+  overflow: auto;
+}
+
+code {
+  font-family: 'Work Sans', sans-serif;
+} */
 body {
   margin: 0;
   padding: 0;
@@ -12,6 +28,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+/* .main-container{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} */
 
 .card.horizontal .card-image img {
     border-radius: 2px 0 0 2px;
@@ -43,6 +66,15 @@ code {
     min-height: 18px;
     display: none;
 }
+/* .btn, .btn-large, .btn-small {
+  margin-right: 10px;
+}
+::placeholder{
+  font-weight: bold;
+} */
+
+
+
 
 @media only screen and (min-width: 993px){
   .container {

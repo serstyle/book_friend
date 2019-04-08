@@ -16,14 +16,8 @@ class Navbar extends React.Component{
 	closeModal = e => {
 		this.setState({isOpen: false, isRegOpen:false}) 
 	}
-	openModal = e => {
-		this.setState({isOpen: true}) 
-	}
 	closeRegModal = e => {
 		this.setState({isRegOpen: false, isOpen:false}) 
-	}
-	openRegModal = e => {
-		this.setState({isRegOpen: true}) 
 	}
 	
 	render(){
@@ -31,54 +25,55 @@ class Navbar extends React.Component{
 			<nav>
 				<div className="nav-wrapper teal">
 					<Link to='/' onClick={this.props.resetBookList} className="brand-logo">Book Friends</Link>
-					{this.props.isAuthenticate? 
+						{this.props.isAuthenticate? 
+							<ul id="nav-mobile" className="right hide-on-med-and-down">
+								<li>
+									<Button className='m5'>
+										{this.props.route === '/profile'?
+										<Link to='/' onClick={this.props.resetBookList}>Home</Link>  
+										: 
+										<Link to='/profile'>Profile</Link> 
+										}
+									</Button>
+								</li>
+								<li>
+									<Button onClick={this.props.authSignout}>
+										Signout
+									</Button>
+								</li>
+							</ul>
+						:
 						<ul id="nav-mobile" className="right hide-on-med-and-down">
 							<li>
-								<Button className='m5'>
-									{this.props.route === '/profile'?
-									<Link to='/'>Home</Link>  
-									: 
-									<Link to='/profile'>Profile</Link> 
-									}
-								</Button>
-							</li>
-							<li>
-								<Button onClick={this.props.authSignout}>
-									Signout
-								</Button>
-							</li>
-						</ul>
-					:
-						<ul id="nav-mobile" className="right hide-on-med-and-down">
-							<li>
-								<Button 
-									onClick={this.openModal} 
-									href='#signin'
-									className="modal-trigger">
-									Sign in
-								</Button>
-
 								<Modal 
 									id='signin' 
-									open={this.state.isOpen} 
-									header='Signin'> 
+									open={this.state.isOpen}
+									header='Signin'
+									modalOptions={{preventScrolling:false}}
+									trigger={
+										<Button>
+											Sign in
+										</Button>
+										}
+									> 
 									<Signin closeModal={this.closeModal} /> 
 								</Modal>
 							</li>
-								<li>
-									<Button 
-										onClick={this.openRegModal} 
-										href='#register' 
-										className="modal-trigger">
-										Register
-									</Button>
-									<Modal 
-										header='Register' 
-										open={this.state.isRegOpen} 
-										id="register"> 
-										<Register closeRegModal={this.closeRegModal} /> 
-									</Modal>
-								</li>
+							<li>
+								<Modal 
+									id='register' 
+									open={this.state.isRegOpen}
+									header='Register'
+									modalOptions={{preventScrolling:false}}
+									trigger={
+										<Button>
+											Register
+										</Button>
+										} 
+									>
+									<Register closeRegModal={this.closeRegModal} /> 
+								</Modal>
+							</li>
 						</ul>
 					}
 				</div>

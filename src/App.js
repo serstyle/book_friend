@@ -1,61 +1,37 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
-import BookList from './BookList'
-import Search from './Search'
-import Navbar from './Navbar'
-import { setSearchChange, onSubmitBook } from './actions'
+import Navbar from './components/Navbar/Navbar'
+import Home from './components/Home/Home'
+import Profile from './components/Profile/Profile'
+import SearchPage from './components/Search/SearchPage'
 
-
-  const mapStateToProps = state =>{
-    return{
-      input: state.searchChange.input,
-      bookList: state.onSubmitBook.bookList,
-      isPending: state.onSubmitBook.isPending,
-      error: state.onSubmitBook.error
-    }
+const mapStateToProps = state =>{
+  return{
+    bookList: state.onSubmitBook.bookList,
+    isPending: state.onSubmitBook.isPending,
+    error: state.onSubmitBook.error
   }
-
-  const mapDipatchToProps = (dispatch) =>{
-    return{
-      onSearchChange: (event) => dispatch(setSearchChange(event.target.value)),
-      onSubmitBook: () => dispatch(onSubmitBook())
-    }
-  }
+}
 
 
 class App extends Component {
 
-  // componentDidMount() {
-  //   fetch("https://www.googleapis.com/books/v1/volumes?q=harry+potter")
-  //   .then(res => res.json())
-  //   .then(data => {
-  //     console.log(data.items)
-  //     this.setState({bookList: data.items})})
-  // }
-
-
-
-  onSubmit = (e) =>{
-    e.preventDefault()
-    this.props.onSubmitBook()
-  }
-
 
   render() {
     return (
-      <div>
-        <Navbar />
-        <div className='container'>
-          <h1>book Friend </h1>
-          <Search onSearchChange={this.props.onSearchChange} onSubmit={this.onSubmit}/>
-          {this.props.bookList?
-                    <BookList booklist={this.props.bookList} />
-                    :
-                    <p> Welcome on BookFRIENDS </p>}
-        </div>
-      </div>
+        <BrowserRouter>
+          <div>
+            <Navbar />
+              <Switch className='container'>
+                <Route exact path='/' render={(props) => <Home {...props} bookList={this.props.bookList}  />} />
+                <Route path='/profile' render={(props) => <Profile {...props} />} />
+                <Route path='/search' render={(props) => <SearchPage {...props} />} />
+              </Switch>
+          </div>
+        </BrowserRouter> 
     );
   }
 }
 
-export default connect(mapStateToProps, mapDipatchToProps)(App);
+export default connect(mapStateToProps)(App);

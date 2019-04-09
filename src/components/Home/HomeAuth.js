@@ -20,7 +20,7 @@ class HomeAuth extends React.Component {
             <div>
                 <Search />
                     {this.props.isPending?
-                        <Preloader size="big" />
+                        <Preloader className='preloader' size="big" />
                         :
                         this.props.bookList?
                         

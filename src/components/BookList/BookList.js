@@ -1,6 +1,7 @@
 import React from 'react'
-import Book from '../Book/Book'
 import {connect} from 'react-redux'
+import {Preloader} from 'react-materialize';
+import Book from '../Book/Book'
 
  const mapStateToProps = state =>{
     return{
@@ -25,9 +26,9 @@ class BookList extends React.Component{
 				/>)
 		})
 		:
-		<div>load</div>
+		<Preloader className='preloader' size="big" />
 	return(
-		<div className='row container'>
+		<div className='row container bg-white'>
 			{books}
 		</div>
 		)

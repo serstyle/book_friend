@@ -17,10 +17,11 @@ const Book = ({ title, authors, image, description }) =>{
 			        <div className="card-action">
 			          <button className="btn-floating waves-effect waves-light red"><i className="material-icons">add</i></button>
 			          <Modal
-						  header={title}
-						  trigger={<Button>ABOUT</Button>}>
-						  <p>{description}</p>
-						</Modal>
+									modalOptions={{preventScrolling:false}}
+									header={title}
+									trigger={<Button>ABOUT</Button>}>
+									<p>{description}</p>
+								</Modal>
 			        </div>
 			      </div>
 			    </div>

@@ -6,6 +6,8 @@ import Home from './components/Home/Home'
 import Profile from './components/Profile/Profile'
 import SearchPage from './components/Search/SearchPage'
 
+import { loadUser } from './actions'
+
 const mapStateToProps = state =>{
   return{
     bookList: state.onSubmitBook.bookList,
@@ -14,10 +16,17 @@ const mapStateToProps = state =>{
   }
 }
 
+const mapDispatchToProps = (dispatch) =>{
+  return {
+    loadUser: ()=>dispatch(loadUser())
+  }
+}
 
 class App extends Component {
 
-
+  componentDidMount(){
+    this.props.loadUser();
+  }
   render() {
     return (
         <BrowserRouter>
@@ -34,4 +43,4 @@ class App extends Component {
   }
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

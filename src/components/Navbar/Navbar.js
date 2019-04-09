@@ -6,20 +6,25 @@ import { Modal, Button } from 'react-materialize';
 import Signin from '../Signin/Signin'
 import Register from '../Register/Register'
 
-import {resetBookList, authSignout} from '../../actions'
+import {resetBookList, logout} from '../../actions'
 
 class Navbar extends React.Component{
-	state = {
-		isOpen: false,
-		isRegOpen:false
+	// state = {
+	// 	isOpen: false,
+	// 	isRegOpen:false
+	// }
+	// closeModal = e => {
+	// 	this.setState({isOpen: false, isRegOpen:false}) 
+	// }
+	// closeRegModal = e => {
+	// 	this.setState({isRegOpen: false, isOpen:false}) 
+	// }
+	//closeRegModal={this.closeRegModal}
+	// open={this.state.isRegOpen}
+	signout = () => {
+		this.props.resetBookList()
+		this.props.logout()
 	}
-	closeModal = e => {
-		this.setState({isOpen: false, isRegOpen:false}) 
-	}
-	closeRegModal = e => {
-		this.setState({isRegOpen: false, isOpen:false}) 
-	}
-	
 	render(){
 		return (
 			<nav>
@@ -37,7 +42,7 @@ class Navbar extends React.Component{
 									</Button>
 								</li>
 								<li>
-									<Button onClick={this.props.authSignout}>
+									<Button  onClick={this.signout}>
 										Signout
 									</Button>
 								</li>
@@ -47,7 +52,6 @@ class Navbar extends React.Component{
 							<li>
 								<Modal 
 									id='signin' 
-									open={this.state.isOpen}
 									header='Signin'
 									modalOptions={{preventScrolling:false}}
 									trigger={
@@ -56,13 +60,12 @@ class Navbar extends React.Component{
 										</Button>
 										}
 									> 
-									<Signin closeModal={this.closeModal} /> 
+									<Signin /> 
 								</Modal>
 							</li>
 							<li>
 								<Modal 
 									id='register' 
-									open={this.state.isRegOpen}
 									header='Register'
 									modalOptions={{preventScrolling:false}}
 									trigger={
@@ -71,7 +74,7 @@ class Navbar extends React.Component{
 										</Button>
 										} 
 									>
-									<Register closeRegModal={this.closeRegModal} /> 
+									<Register /> 
 								</Modal>
 							</li>
 						</ul>
@@ -92,7 +95,7 @@ const mapStateToProps= (state) =>{
 const mapDispatchToProps = (dispatch) =>{
 	return{
 		resetBookList: ()=> dispatch(resetBookList()),
-		authSignout: ()=> dispatch(authSignout())
+		logout: ()=> dispatch(logout())
 }
 }
 

@@ -12,7 +12,7 @@ class Register extends React.Component {
 		e.preventDefault();
 		console.log(this.state)
 		this.props.authRegister(this.state)
-		this.props.closeRegModal()
+		// this.props.closeRegModal()
 	}
 	render(){
 		return(

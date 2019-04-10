@@ -25,24 +25,13 @@ export const resetBookList = () =>({
 	type: 'ON_RESET_BOOK',
 })
 
-
-
-export const authRegister = (user) => ({
-	type: 'AUTHENTICATION_SUCCESS',
-	payload: user
-})
-
-
-
 //get the route
 export const onRouteChange = (route) => ({
 	type: 'ON_ROUTE_CHANGE',
 	payload: route
 })
 
-
 //auth
-
 
 //   //Loggin
 //   LOGIN_SUCCESS,
@@ -122,3 +111,38 @@ export const logout = () => (dispatch, getState) =>{
 //   //register
 //   REGISTER_SUCCESS,
 //   REGISTER_FAIL
+
+export const authRegister = (user) => (dispatch) => (
+	fetch('http://localhost:3000/register', {
+		method: 'POST',
+		headers: {
+		  'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({email:user.email, hash:user.password, name:user.name})
+	})
+	.then(res=> res.json())
+	.then(data=> {
+			const token = data.token;
+			fetch('http://localhost:3000/profile', {
+				method:'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'Authorization': data.token
+				}
+			})
+			.then(res=> res.json())
+			.then(data => {
+				if(data === 'unauthorized'){
+					return dispatch({type:'REGISTER_FAIL', payload:'wrong credentials'})
+				}
+				dispatch({type:'REGISTER_SUCCESS', payload: {data, token} })
+				console.log(data)
+			})
+			.catch(err => dispatch({type:'REGISTER_FAIL', payload:'wrong credentials'}))
+		})
+	 
+)
+
+export const close_modal = () => ({
+	type:'CLOSE_MODAL_SUCCESS'
+})

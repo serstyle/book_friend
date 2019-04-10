@@ -19,9 +19,13 @@ const mapDispatchToProps = (dispatch) =>{
 
 class Signin extends React.Component {
 	state={
-		email:'a@a.com',
-		password:'test'
+		email:'',
+		password:''
 	}
+	// componentDidUpdate(prevState){
+	// 	if()
+	// 	this.setState({password:''})
+	// }
 	onSubmit = e =>{
 		e.preventDefault();
 		this.props.authSignin(this.state)
@@ -31,14 +35,19 @@ class Signin extends React.Component {
 			<div className="row">
 				<form className="col s12" onSubmit={this.onSubmit}>
 					<div className="row">
+						{this.props.isError?
+							<p className='red-text bold'>Wrong password/email</p>
+							:
+							null
+							}
 						<div className="input-field col s12">
 							<i className="material-icons prefix">account_circle</i>
-							<input id="signinEmail" type="email" value='a@a' required className="validate" onChange={e => this.setState({email:e.target.value}) } />
+							<input id="signinEmail" type="email" required className="validate" onChange={e => this.setState({email:e.target.value}) } />
 							<label htmlFor="signinEmail">Email</label>
 						</div>
 						<div className="input-field col s12">
 							<i className="material-icons prefix">lock</i>
-							<input id="signinPassword" type="password" value='1' required className="validate" onChange={e => this.setState({password:e.target.value}) } />
+							<input id="signinPassword" type="password" required className="validate" onChange={e => this.setState({password:e.target.value}) } />
 							<label htmlFor="signinPassword">Password</label>
 						</div>
 					</div>
@@ -49,4 +58,10 @@ class Signin extends React.Component {
 	}
 }
 
-export default connect(null, mapDispatchToProps)(Signin)
+const mapStateToProps = (state) => {
+	return {
+		isError: state.Authentication.isError
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signin)

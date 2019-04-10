@@ -5,8 +5,8 @@ import {authRegister} from '../../actions'
 class Register extends React.Component {
 	state={
 		email:'',
-        password:'',
-        name:''
+		password:'',
+		name:''
 	}
 	onSubmit = e =>{
 		e.preventDefault();
@@ -19,6 +19,11 @@ class Register extends React.Component {
 			<div className="row">
 				<form className="col s12" onSubmit={this.onSubmit}>
 					<div className="row">
+						{this.props.isError?
+						<p className='red-text bold'>Please use an other email</p>
+						:
+						null
+						}
 						<div className="input-field col s12">
 							<i className="material-icons prefix">email</i>
 							<input id="registerEmail" type="email" required className="validate" onChange={e => this.setState({email:e.target.value}) } />
@@ -48,4 +53,10 @@ const mapDispatchToProps = (dispatch) =>{
   }
 }
 
-export default connect(null, mapDispatchToProps)(Register)
+const mapStateToProps = (state) => {
+	return {
+		isError: state.Authentication.isError
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register)

@@ -23,7 +23,6 @@ class HomeAuth extends React.Component {
                         <Preloader className='preloader' size="big" />
                         :
                         this.props.bookList?
-                        
                         <Redirect to='/search' />
                         :<p>welcome francois</p>
                     }

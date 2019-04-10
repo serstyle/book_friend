@@ -17,7 +17,7 @@ const Book = ({ title, authors, image, description }) =>{
 			        <div className="card-action">
 			          <button className="btn-floating waves-effect waves-light red"><i className="material-icons">add</i></button>
 			          <Modal
-									modalOptions={{preventScrolling:false}}
+									// modalOptions={{preventScrolling:false}}
 									header={title}
 									trigger={<Button>ABOUT</Button>}>
 									<p>{description}</p>

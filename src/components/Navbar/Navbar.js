@@ -6,7 +6,7 @@ import { Modal, Button } from 'react-materialize';
 import Signin from '../Signin/Signin'
 import Register from '../Register/Register'
 
-import {resetBookList, logout} from '../../actions'
+import {resetBookList, logout, close_modal} from '../../actions'
 
 class Navbar extends React.Component{
 	// state = {
@@ -53,9 +53,13 @@ class Navbar extends React.Component{
 								<Modal 
 									id='signin' 
 									header='Signin'
-									modalOptions={{preventScrolling:false}}
+									modalOptions={{
+										preventScrolling:false,
+										onCloseStart:()=>this.props.close_modal()
+									
+									}}
 									trigger={
-										<Button>
+										<Button >
 											Sign in
 										</Button>
 										}
@@ -67,9 +71,12 @@ class Navbar extends React.Component{
 								<Modal 
 									id='register' 
 									header='Register'
-									modalOptions={{preventScrolling:false}}
+									modalOptions={{
+										preventScrolling:false,
+										onCloseStart:()=>this.props.close_modal()
+										}}
 									trigger={
-										<Button>
+										<Button onClick={this.props.logout}>
 											Register
 										</Button>
 										} 
@@ -95,7 +102,8 @@ const mapStateToProps= (state) =>{
 const mapDispatchToProps = (dispatch) =>{
 	return{
 		resetBookList: ()=> dispatch(resetBookList()),
-		logout: ()=> dispatch(logout())
+		logout: ()=> dispatch(logout()),
+		close_modal: ()=> dispatch(close_modal())
 }
 }
 

@@ -19,10 +19,11 @@ class BookList extends React.Component{
 		this.props.bookList.map (book =>{
 			return(<Book
 				 key={book.id} 
+				 bookid={book.id}
 				 title={book.volumeInfo.title}
 				 authors={book.volumeInfo.authors?book.volumeInfo.authors[0]:'unknow'}
-				 image={book.volumeInfo.imageLinks?book.volumeInfo.imageLinks.smallThumbnail:'#'}
-				 description={book.volumeInfo.description}
+				 image={book.volumeInfo.imageLinks?book.volumeInfo.imageLinks.smallThumbnail:'/media/book_cover.jpg'}
+				 description={book.volumeInfo.description?book.volumeInfo.description:'no description'}
 				/>)
 		})
 		:

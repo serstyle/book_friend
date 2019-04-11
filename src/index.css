@@ -4,7 +4,8 @@ body {
   font-family: 'Work Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: url(background.jpg)no-repeat center center fixed;
+  /* background: url(background.jpg)no-repeat center center fixed; */
+  background: #f0f0f0;
   background-size: cover;
   height: 100%;
   overflow: hidden;
@@ -81,6 +82,46 @@ code {
   transform: translate(-50%, -50%);
 }
 
+.modal{
+  min-height: 20%
+}
+
+.collection-list{
+  min-height: 400px
+}
+
+
+.alert-danger {
+  z-index: 5;
+  color: #721c24;
+  background-color: #f8d7da;
+  -webkit-box-shadow: 10px 10px 28px -9px rgba(0,0,0,0.43);
+  -moz-box-shadow: 10px 10px 28px -9px rgba(0,0,0,0.43);
+  box-shadow: 10px 10px 28px -9px rgba(0,0,0,0.43);
+  border-color: #f5c6cb;
+  width: 80%;
+  top:5%;
+  left:10%;
+  position: fixed;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.error-booklist{
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  z-index: 5;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  color: white;
+}
+
+.bottom-book{
+  display: flex;
+}
 
 @media only screen and (min-width: 993px){
   .container {

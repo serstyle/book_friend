@@ -21,9 +21,94 @@ export const onSubmitBook = () => (dispatch, getState) => {
     .catch(err => dispatch({type:REQUEST_BOOK_FAILED, payload:err}))
 }
 
+export const onSubmitBookById = (bookid) => (dispatch) => {
+	dispatch({type:'REQUEST_BOOKID_PENDING'})
+	fetch(`https://www.googleapis.com/books/v1/volumes/${bookid}`) //getstate to take a state from an other reducer
+    .then(res => res.json())
+    .then(data => {dispatch({type:'REQUEST_BOOKID_SUCCESS', payload:data}) 
+    	console.log(data)})
+    .catch(err => dispatch({type:'REQUEST_BOOKID_FAIL', payload:err}))
+}
+
 export const resetBookList = () =>({
 	type: 'ON_RESET_BOOK',
 })
+
+//add a book to the db 
+export const addBook = (book) => (dispatch, getState) => {
+	const email = getState().Authentication.user.email;
+	const token = localStorage.getItem('token')
+	const description = book.description.length > 40 ? book.description.substring(0, 40) + '...' : book.description;
+	dispatch({type:'ADD_BOOK_PENDING'})
+	fetch("http://localhost:3000/addbook", {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': token
+		},
+		body: JSON.stringify({
+			email, 
+			bookID:book.bookid,
+			title:book.title, 
+			authors:book.authors, 
+			description:description
+		})
+	})
+	.then(res => res.json())
+	.then(data => {
+		if(data !== 'success'){
+			dispatch({type:'ADD_BOOK_FAIL', payload:data})
+			setTimeout(() => {
+				dispatch({ type: 'HIDE_NOTIFICATION' })
+			}, 3000)
+		}
+		else {
+			dispatch({type:'ADD_BOOK_SUCCESS', payload:book.bookid})
+			dispatch(getUserBookList(email))
+		}
+	})
+}
+//get book from bookid : https://www.googleapis.com/books/v1/volumes/
+
+//get the user s booklist
+
+const getUserBookList = (email, token) => (dispatch, getState) => {
+	dispatch({type:'GET_USER_BOOKLIST_PENDING'})
+	fetch('http://localhost:3000/getbook', {
+		method: 'POST',
+		headers:{
+			'Content-Type': 'application/json',
+			'Authorization': token || localStorage.getItem('token')
+		},
+		body: JSON.stringify({email})
+	})
+	.then(res => res.json())
+	.then(data => {
+		console.log('booklist :', data)
+		dispatch({type:'GET_USER_BOOKLIST_SUCCESS', payload: data})
+	})
+}
+
+//del a book 
+
+export const delBook = (bookid) => (dispatch, getState) => {
+	fetch('http://localhost:3000/delbook', {
+		method:'POST',
+		headers:{
+			'Content-Type': 'application/json',
+			'Authorization': localStorage.getItem('token')
+		},
+		body: JSON.stringify({email: getState().Authentication.user.email,bookid})
+	})
+	.then(res => res.json())
+	.then(data => {
+		dispatch({type:'DEL_BOOK_SUCCESS_SHOW', payload:bookid})
+		setTimeout(() => {
+			dispatch({ type: 'DEL_BOOK_SUCCESS_HIDE' })
+		}, 3000)
+	})
+}
+
 
 //get the route
 export const onRouteChange = (route) => ({
@@ -60,6 +145,7 @@ export const authSignin = (user) => (dispatch) => {
 				if(data === 'unauthorized'){
 					return dispatch({type:'LOGIN_FAIL', payload:'wrong credentials'})
 				}
+				dispatch(getUserBookList(data.email, token))
 				dispatch({type:LOGIN_SUCCESS, payload: {data, token} })
 				console.log(data)
 			})
@@ -86,6 +172,7 @@ export const loadUser = () => (dispatch) =>{
 		if(data === 'unauthorized'){
 			return dispatch({type:'AUTH_ERROR', payload:'wrong credentials'})
 		}
+		dispatch(getUserBookList(data.email))
 		dispatch({type:'USER_LOADED', payload: data })
 		console.log(data)
 	})

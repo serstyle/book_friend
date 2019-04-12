@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom';
-import { Modal, Button } from 'react-materialize';
+import { Modal, Button, Icon } from 'react-materialize';
 
 import Signin from '../Signin/Signin'
 import Register from '../Register/Register'
@@ -33,13 +33,16 @@ class Navbar extends React.Component{
 						{this.props.isAuthenticate? 
 							<ul id="nav-mobile" className="right hide-on-med-and-down">
 								<li>
-									<Button className='m5'>
+									
 										{this.props.route === '/profile'?
 										<Link to='/' onClick={this.props.resetBookList}>Home</Link>  
 										: 
 										<Link to='/profile'>Profile</Link> 
 										}
-									</Button>
+									
+								</li>
+								<li>
+								<Link to='/settings'><Icon>settings</Icon></Link>				
 								</li>
 								<li>
 									<Button  onClick={this.signout}>

@@ -50,7 +50,7 @@ class SearchPage extends React.Component {
             <div>
                 {this.props.isError?
                     <Chip className='error-booklist red'>
-                        The limit of book in a list is 5 !
+                        The limit of book in a list is 10 !
                     </Chip>
                     :
                     null

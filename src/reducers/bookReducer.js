@@ -55,9 +55,9 @@ export const userBookList = (state = initialStateAddBook, action={})=>{
 		case 'ADD_BOOK_PENDING':
 			return {...state, isPending:true, isError:false}
 		case 'ADD_BOOK_SUCCESS':
-			return{...state, isPending:false, isError:false, bookList:[...state.bookList, {bookid: action.payload}]}
+			return{...state, isPending:false, isError:false, bookList:action.payload}
 		case 'ADD_BOOK_FAIL':
-			return{...state, isPending:false, isError:true, error:action.payload}
+			return{...state, isPending:false, isError:true}
 		case 'HIDE_NOTIFICATION':
 			return {...state, isError:false}
 		case 'GET_USER_BOOKLIST_PENDING':

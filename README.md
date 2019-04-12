@@ -2,7 +2,7 @@ ne pas oublier de travailler sur une branch et non sur le master
 
 profile pages :(
 -to read
-add book to read from search (add to the to read db) // bug quand add un nouveau book a cause du dispatch(getUserBookList(email)) dans le addBook action trouver solution
+add book to read from search (add to the to read db) // done (try to find bug)
 delete book of to read // done (try to find bugs)
 
 

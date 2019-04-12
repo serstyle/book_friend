@@ -56,15 +56,14 @@ export const addBook = (book) => (dispatch, getState) => {
 	})
 	.then(res => res.json())
 	.then(data => {
-		if(data !== 'success'){
-			dispatch({type:'ADD_BOOK_FAIL', payload:data})
+		if(data === 'too much book'){
+			dispatch({type:'ADD_BOOK_FAIL'})
 			setTimeout(() => {
 				dispatch({ type: 'HIDE_NOTIFICATION' })
 			}, 3000)
 		}
 		else {
-			dispatch({type:'ADD_BOOK_SUCCESS', payload:book.bookid})
-			dispatch(getUserBookList(email))
+			dispatch({type:'ADD_BOOK_SUCCESS', payload:data})
 		}
 	})
 }

@@ -6,8 +6,8 @@ import Book from '../Book/Book'
  const mapStateToProps = state =>{
     return{
     	bookList: state.onSubmitBook.bookList,
-			isPending: state.onSubmitBook.isPending,
-			error: state.onSubmitBook.error
+		isPending: state.onSubmitBook.isPending,
+		error: state.onSubmitBook.error
     }
 }
 

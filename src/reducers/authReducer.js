@@ -41,7 +41,8 @@ export const Authentication = (state=initialStateAuthentication, action={}) =>{
 		case 'CLOSE_MODAL_SUCCESS':
 			return{...state, isError: false}
 
-
+		case 'UPDATE_USER_SUCCESS':
+			return{...state, user:action.payload}
 		default:
 			return state
 	}	

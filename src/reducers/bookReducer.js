@@ -45,6 +45,7 @@ export const onSubmitBook = (state=initialStateBook, action={})=>{
 const initialStateAddBook = {
 	isPending: false,
 	isError: false,
+	isSuccess:false,
 	error:'',
 	bookList:[],
 	isShowingNotification:false
@@ -55,11 +56,11 @@ export const userBookList = (state = initialStateAddBook, action={})=>{
 		case 'ADD_BOOK_PENDING':
 			return {...state, isPending:true, isError:false}
 		case 'ADD_BOOK_SUCCESS':
-			return{...state, isPending:false, isError:false, bookList:action.payload}
+			return{...state, isPending:false, isError:false, isSuccess:true, bookList:action.payload}
 		case 'ADD_BOOK_FAIL':
-			return{...state, isPending:false, isError:true}
+			return{...state, isPending:false, isError:true, isSuccess:false}
 		case 'HIDE_NOTIFICATION':
-			return {...state, isError:false}
+			return {...state, isError:false, isSuccess:false}
 		case 'GET_USER_BOOKLIST_PENDING':
 			return {...state, isPending:true}
 		case 'GET_USER_BOOKLIST_SUCCESS':

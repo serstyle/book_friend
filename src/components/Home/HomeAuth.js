@@ -11,7 +11,9 @@ const mapStateToProps = state =>{
     return{
       bookList: state.onSubmitBook.bookList,
       isPending: state.onSubmitBook.isPending,
-      error: state.onSubmitBook.error
+      error: state.onSubmitBook.error,
+      isLoading: state.Authentication.isLoading,
+      user: state.Authentication.user
     }
   }
 class HomeAuth extends React.Component {
@@ -19,12 +21,12 @@ class HomeAuth extends React.Component {
         return(
             <div>
                 <Search />
-                    {this.props.isPending?
+                    {this.props.isPending && this.props.isLoading?
                         <Preloader className='preloader' size="big" />
                         :
                         this.props.bookList?
                         <Redirect to='/search' />
-                        :<p>welcome francois</p>
+                        :<p>Welcome {this.props.user.name}</p>
                     }
             </div>
         )

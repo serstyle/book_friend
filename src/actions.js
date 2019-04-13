@@ -64,6 +64,9 @@ export const addBook = (book) => (dispatch, getState) => {
 		}
 		else {
 			dispatch({type:'ADD_BOOK_SUCCESS', payload:data})
+			setTimeout(() => {
+				dispatch({ type: 'HIDE_NOTIFICATION' })
+			}, 3000)
 		}
 	})
 }
@@ -228,6 +231,31 @@ export const authRegister = (user) => (dispatch) => (
 		})
 	 
 )
+
+
+export const updateUser = (user) => (dispatch, getState) => {
+	const token = localStorage.getItem('token');
+	let {email, name, age, city} = user;
+	if(!name.length){
+		name = getState().Authentication.user.name
+	}
+	if(!age.length){
+		age = getState().Authentication.user.age
+	}
+	if(!city.length){
+		city = getState().Authentication.user.city
+	}
+	fetch('http://localhost:3000/updateprofile', {
+		method:'PUT',
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': token
+		},
+		body: JSON.stringify({email, name, age, city})
+	})
+	.then(res=> res.json())
+	.then(data=> dispatch({type:'UPDATE_USER_SUCCESS', payload:data}))
+}
 
 export const close_modal = () => ({
 	type:'CLOSE_MODAL_SUCCESS'

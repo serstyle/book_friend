@@ -38,7 +38,7 @@ class Profile extends React.Component{
         return (
         	<div>
                         {this.props.isNotification?
-                                <p className='alert-danger'>Book Deleted !</p>
+                                <p className='alert alert-danger'>Book Deleted !</p>
                                 :
                                 null
                         }

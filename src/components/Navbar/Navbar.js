@@ -27,8 +27,11 @@ class Navbar extends React.Component{
 	}
 	render(){
 		return (
-			<nav>
-				<div className="nav-wrapper teal">
+			<nav className="nav-wrapper teal">
+				{this.props.isLoading?
+				null
+				:
+				<div>
 					<Link to='/' onClick={this.props.resetBookList} className="brand-logo">Book Friends</Link>
 						{this.props.isAuthenticate? 
 							<ul id="nav-mobile" className="right hide-on-med-and-down">
@@ -45,9 +48,9 @@ class Navbar extends React.Component{
 								<Link to='/settings'><Icon>settings</Icon></Link>				
 								</li>
 								<li>
-									<Button  onClick={this.signout}>
+									<Link to='/' onClick={this.signout}>
 										Signout
-									</Button>
+									</Link>
 								</li>
 							</ul>
 						:
@@ -62,7 +65,7 @@ class Navbar extends React.Component{
 									
 									}}
 									trigger={
-										<Button >
+										<Button>
 											Sign in
 										</Button>
 										}
@@ -79,7 +82,7 @@ class Navbar extends React.Component{
 										onCloseStart:()=>this.props.close_modal()
 										}}
 									trigger={
-										<Button onClick={this.props.logout}>
+										<Button>
 											Register
 										</Button>
 										} 
@@ -90,6 +93,7 @@ class Navbar extends React.Component{
 						</ul>
 					}
 				</div>
+				}
 			</nav>
 		)
 	}
@@ -98,7 +102,8 @@ class Navbar extends React.Component{
 const mapStateToProps= (state) =>{
 	return{
 		isAuthenticate: state.Authentication.isAuthenticate,
-		route: state.onRouteChange.route
+		route: state.onRouteChange.route,
+		isLoading: state.Authentication.isLoading
 }
 }
 

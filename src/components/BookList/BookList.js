@@ -21,9 +21,9 @@ class BookList extends React.Component{
 				 key={book.id} 
 				 bookid={book.id}
 				 title={book.volumeInfo.title}
-				 authors={book.volumeInfo.authors?book.volumeInfo.authors[0]:'unknow'}
+				 authors={book.volumeInfo.authors?book.volumeInfo.authors[0]:'Unknow'}
 				 image={book.volumeInfo.imageLinks?book.volumeInfo.imageLinks.smallThumbnail:'/media/book_cover.jpg'}
-				 description={book.volumeInfo.description?book.volumeInfo.description:'no description'}
+				 description={book.volumeInfo.description?book.volumeInfo.description:'No description'}
 				/>)
 		})
 		:

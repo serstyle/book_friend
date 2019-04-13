@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router'
 
-import {Preloader, Chip} from 'react-materialize';
+import {Preloader} from 'react-materialize';
 
 import { loadUser } from '../../actions'
 
@@ -21,7 +21,8 @@ const mapStateToProps = state =>{
       isPending: state.onSubmitBook.isPending,
       isAuthenticate: state.Authentication.isAuthenticate,
       isLoading: state.Authentication.isLoading,
-      isError: state.userBookList.isError
+      isError: state.userBookList.isError,
+      isSuccess: state.userBookList.isSuccess
     }
   }
 class SearchPage extends React.Component {
@@ -49,9 +50,16 @@ class SearchPage extends React.Component {
         return(
             <div>
                 {this.props.isError?
-                    <Chip className='error-booklist red'>
+                    <p className='alert alert-danger'>
                         The limit of book in a list is 10 !
-                    </Chip>
+                    </p>
+                    :
+                    null
+                }
+                {this.props.isSuccess?
+                    <p className='alert alert-success'>
+                        Book added !
+                    </p>
                     :
                     null
                 }

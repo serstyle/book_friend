@@ -1,52 +1,109 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router'
-import { onRouteChange, loadUser } from '../../actions'
+import { onRouteChange, loadUser, updateUser } from '../../actions'
+
+import { Button } from 'react-materialize';
 
 class Settings extends React.Component {
     state = {
-        isNameOpen:false
+        name:'',
+        age:'',
+        city:'',
+        isError:false,
+        isSuccess:false
     }
     componentDidMount(){
         this.props.onRouteChange(this.props.location.pathname)
-        this.props.loadUser()
+        const {loadUser} = this.props
+        loadUser()
     }
+
+    onSubmit = (e) => {
+        e.preventDefault()
+        let {name, city, age} = this.state;
+        
+        if(name.length || age.length || city.length){
+            this.props.updateUser({
+                email:this.props.user.email,
+                name:name,
+                age:age,
+                city:city,
+            })
+            this.setState({
+                name:'',
+                age:'',
+                city:'',
+                isSuccess:true,
+                isError:false
+            })
+            setTimeout(()=>{
+                this.setState({isSuccess:false})
+            }, 3000)
+        }
+        else{
+            this.setState({
+                isError:true,
+                isSuccess:false
+            })
+            setTimeout(()=>{
+                this.setState({isError:false})
+            }, 3000)
+        }
+    }
+    inputChange = (e) =>{
+        this.setState({[e.target.id]:e.target.value})
+        console.log(this.state)
+    }
+
     render(){
         const settings = 
             this.props.isAuthenticate?
-            <div className=''>
+            <div key='key' className=''>
                 <h3 className='center'>Settings</h3>
                 <h5 className='center'>Change your name, age, city</h5>
-                {
-                    this.props.isLoading?
-                    <p>wait</p>
-                    :
-                    <form className="container">
+                <div class="row">
+                    <form onSubmit={this.onSubmit} class="col s12">
                         <div class="row">
-                            <h6 className='col m1 s12 input-title'>Name: </h6>
-                            <div class="input-field col m11 s12">
-                                {this.state.isNameOpen?
-                                <input id="name" type="text" class="validate" placeholder='Type your name' required/>
-                                :
-                                this.props.user.name}
-                                
+                            <div class="input-field col s12">
+                                <input onChange={this.inputChange} value={this.state.name} id="name" type="text" class="validate"/>
+                                <label for="name">Your name is '{this.props.user.name}'</label>
                             </div>
-                            <h6 className='col m1 s12 input-title'>Age: </h6>
-                            <div class="input-field col m11 s12">
-                                <input id="age" type="text" class="validate" placeholder='Type your age'/>
+                            <div class="input-field col s12">
+                                <input onChange={this.inputChange} value={this.state.age} id="age" type="text" class="validate"/>
+                                <label for="age">Your age is '{this.props.user.age}'</label>
                             </div>
-                            <h6 className='col m1 s12 input-title'>City: </h6>
-                            <div class="input-field col m11 s12">
-                                <input id="City" type="text" class="validate" placeholder='Type your City'/>
+                            <div class="input-field col s12">
+                                <input onChange={this.inputChange} value={this.state.city} id="city" type="text" class="validate"/>
+                                <label for="city">Your city is '{this.props.user.city}'</label>
                             </div>
                         </div>
+                        <Button>Save</Button>
                     </form>
-                }
+                </div>
+ 
             </div>
             :
             <Redirect to='/' />
             return(
-                [settings]
+                <div>
+                {this.state.isError?
+                        <p className='alert alert-danger'>Please fill one field before submit !</p>
+                        :
+                        null
+                }
+                {this.state.isSuccess?
+                        <p className='alert alert-success'>Update with SUCCESS !</p>
+                        :
+                        null
+                }
+                {
+                    this.props.isLoading?
+                    <p>wait</p>
+                    :
+                    [settings]
+                }
+                </div>
             )
             }
         
@@ -55,7 +112,8 @@ class Settings extends React.Component {
 const mapDispatchToProps = dispatch =>{
     return {
         onRouteChange:(route) => dispatch(onRouteChange(route)),
-        loadUser: ()=>dispatch(loadUser())
+        loadUser: ()=>dispatch(loadUser()),
+        updateUser: (user)=>dispatch(updateUser(user))
     }
 }
 

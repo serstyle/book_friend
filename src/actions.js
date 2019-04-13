@@ -5,6 +5,8 @@ import { ON_SEARCH_CHANGE,
 	LOGIN_SUCCESS
 } from './constants'
 
+const backend = 'https://bookfriends-server.herokuapp.com/'
+
 //books
 export const setSearchChange = (text) =>({
 	type: ON_SEARCH_CHANGE,
@@ -40,7 +42,7 @@ export const addBook = (book) => (dispatch, getState) => {
 	const token = localStorage.getItem('token')
 	const description = book.description.length > 40 ? book.description.substring(0, 40) + '...' : book.description;
 	dispatch({type:'ADD_BOOK_PENDING'})
-	fetch("http://localhost:3000/addbook", {
+	fetch(`${backend}addbook`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -76,7 +78,7 @@ export const addBook = (book) => (dispatch, getState) => {
 
 const getUserBookList = (email, token) => (dispatch, getState) => {
 	dispatch({type:'GET_USER_BOOKLIST_PENDING'})
-	fetch('http://localhost:3000/getbook', {
+	fetch(`${backend}getbook`, {
 		method: 'POST',
 		headers:{
 			'Content-Type': 'application/json',
@@ -94,7 +96,7 @@ const getUserBookList = (email, token) => (dispatch, getState) => {
 //del a book 
 
 export const delBook = (bookid) => (dispatch, getState) => {
-	fetch('http://localhost:3000/delbook', {
+	fetch(`${backend}delbook`, {
 		method:'POST',
 		headers:{
 			'Content-Type': 'application/json',
@@ -125,7 +127,7 @@ export const onRouteChange = (route) => ({
 //   LOGIN_FAIL,
 
 export const authSignin = (user) => (dispatch) => {
-	fetch('http://localhost:3000/signin', {
+	fetch(`${backend}signin`, {
 		method: 'POST',
 		headers: {
 		  'Content-Type': 'application/json'
@@ -135,7 +137,7 @@ export const authSignin = (user) => (dispatch) => {
 	.then(res=> res.json())
 	.then(data=> {
 			const token = data.token;
-			fetch('http://localhost:3000/profile', {
+			fetch(`${backend}profile`, {
 				method:'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -162,7 +164,7 @@ export const authSignin = (user) => (dispatch) => {
 export const loadUser = () => (dispatch) =>{
 	const token = localStorage.getItem('token')
 	dispatch({type:'USER_LOADING'});
-	fetch('http://localhost:3000/profile', {
+	fetch(`${backend}profile`, {
 		method:'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -185,7 +187,7 @@ export const loadUser = () => (dispatch) =>{
 
 export const logout = () => (dispatch, getState) =>{
 	const token = localStorage.getItem('token');
-	fetch('http://localhost:3000/signout', {
+	fetch(`${backend}signout`, {
 		method:'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -202,7 +204,7 @@ export const logout = () => (dispatch, getState) =>{
 //   REGISTER_FAIL
 
 export const authRegister = (user) => (dispatch) => (
-	fetch('http://localhost:3000/register', {
+	fetch(`${backend}register`, {
 		method: 'POST',
 		headers: {
 		  'Content-Type': 'application/json'
@@ -212,7 +214,7 @@ export const authRegister = (user) => (dispatch) => (
 	.then(res=> res.json())
 	.then(data=> {
 			const token = data.token;
-			fetch('http://localhost:3000/profile', {
+			fetch(`${backend}profile`, {
 				method:'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -245,7 +247,7 @@ export const updateUser = (user) => (dispatch, getState) => {
 	if(!city.length){
 		city = getState().Authentication.user.city
 	}
-	fetch('http://localhost:3000/updateprofile', {
+	fetch(`${backend}updateprofile`, {
 		method:'PUT',
 		headers: {
 			'Content-Type': 'application/json',

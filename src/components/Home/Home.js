@@ -31,7 +31,7 @@ class Home extends React.Component{
 					this.props.isAuthenticate? 
 						<HomeAuth />
 						:
-						<HomeVisitor className='main-container'/>
+						<HomeVisitor className='container'/>
 				}
 			</div>                 
 			)

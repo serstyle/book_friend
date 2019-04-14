@@ -1,9 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {onSubmitBookById, delBook, addBookReading} from '../../../../actions'
+import {onSubmitBookById, delBookReading} from '../../../../actions'
 import {CollectionItem, Modal, Button, Preloader} from 'react-materialize'
 
-class BookToRead extends React.Component{
+class BookReading extends React.Component{
     render(){
         const {title, authors, description, bookid} = this.props
         const bookDescription = (
@@ -33,12 +33,6 @@ class BookToRead extends React.Component{
                         {bookDescription}
                     </Modal>
                     <Button
-                        onClick={()=>this.props.addBookReading(this.props)}
-                        floating
-                        className="green"
-                        icon="add"
-                    />
-                    <Button
                         onClick={()=>this.props.delBook(bookid)}
                         floating
                         className="red"
@@ -53,8 +47,7 @@ class BookToRead extends React.Component{
 const mapDispatchToProps = dispatch =>{
     return{
         requestBook: (bookid)=>dispatch(onSubmitBookById(bookid)),
-        delBook: (bookid)=> dispatch(delBook(bookid)),
-        addBookReading: (book) =>dispatch(addBookReading(book))
+        delBook: (bookid)=> dispatch(delBookReading(bookid))
     }
 }
 
@@ -65,4 +58,4 @@ const mapStateToProps = state =>{
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BookToRead)
+export default connect(mapStateToProps, mapDispatchToProps)(BookReading)

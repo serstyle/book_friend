@@ -9,7 +9,7 @@ import {Row, Preloader} from 'react-materialize'
 
 import BookListToRead from './BookListProfile/BookListToRead'
 import BookFinish from './BookListProfile/BookFinish'
-import BookReading from './BookListProfile/BookReading'
+import BookListReading from './BookListProfile/BookListReading'
 
 const mapDispatchToProps = (dispatch) =>{
         return{
@@ -47,9 +47,9 @@ class Profile extends React.Component{
                                 <Preloader className='preloader' size="big" />
                                 :
                                 this.props.isAuthenticate?
-                                        <Row>
+                                        <Row className='profile-row'>
                                                 <BookListToRead />
-                                                <BookReading />
+                                                <BookListReading />
                                                 <BookFinish />
                                         </Row>
                                         :

@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom';
-import { Modal, Button, Icon } from 'react-materialize';
+import { Icon } from 'react-materialize';
 
-import Signin from '../Signin/Signin'
-import Register from '../Register/Register'
+import SigninModal from '../Signin/SigninModal'
+import RegisterModal from '../Register/RegisterModal'
+import Search from '../Search/Search'
 
 import {resetBookList, logout, close_modal} from '../../actions'
 
@@ -27,7 +28,7 @@ class Navbar extends React.Component{
 	}
 	render(){
 		return (
-			<nav className="nav-wrapper teal">
+			<nav className="nav-wrapper black">
 				{this.props.isLoading?
 				null
 				:
@@ -35,60 +36,29 @@ class Navbar extends React.Component{
 					<Link to='/' onClick={this.props.resetBookList} className="brand-logo">Book Friends</Link>
 						{this.props.isAuthenticate? 
 							<ul id="nav-mobile" className="right hide-on-med-and-down">
+							<li><Search /></li>
 								<li>
-									
-										{this.props.route === '/profile'?
-										<Link to='/' onClick={this.props.resetBookList}>Home</Link>  
-										: 
-										<Link to='/profile'>Profile</Link> 
-										}
-									
+									<Link to='/' onClick={this.props.resetBookList}><button className='btn-flat nav-button-item'>Home</button></Link>  
 								</li>
 								<li>
-								<Link to='/settings'><Icon>settings</Icon></Link>				
+									<Link to='/profile'><button className='btn-flat nav-button-item'>Profile</button></Link> 
+								</li>
+								<li style={{'margin-top': '4px'}}>
+									<Link to='/settings'><Icon>settings</Icon></Link>				
 								</li>
 								<li>
 									<Link to='/' onClick={this.signout}>
-										Signout
+										<button className='btn-flat nav-button-item'>Signout</button>
 									</Link>
 								</li>
 							</ul>
 						:
 						<ul id="nav-mobile" className="right hide-on-med-and-down">
 							<li>
-								<Modal 
-									id='signin' 
-									header='Signin'
-									modalOptions={{
-										preventScrolling:false,
-										onCloseStart:()=>this.props.close_modal()
-									
-									}}
-									trigger={
-										<Button>
-											Sign in
-										</Button>
-										}
-									> 
-									<Signin /> 
-								</Modal>
+								<SigninModal />
 							</li>
 							<li>
-								<Modal 
-									id='register' 
-									header='Register'
-									modalOptions={{
-										preventScrolling:false,
-										onCloseStart:()=>this.props.close_modal()
-										}}
-									trigger={
-										<Button>
-											Register
-										</Button>
-										} 
-									>
-									<Register /> 
-								</Modal>
+								<RegisterModal />
 							</li>
 						</ul>
 					}
@@ -117,3 +87,10 @@ const mapDispatchToProps = (dispatch) =>{
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Navbar))
 
+
+
+// {this.props.route === '/profile'?
+// <Link to='/' onClick={this.props.resetBookList}>Home</Link>  
+// : 
+// <Link to='/profile'>Profile</Link> 
+// }

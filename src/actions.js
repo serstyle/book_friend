@@ -5,7 +5,8 @@ import { ON_SEARCH_CHANGE,
 	LOGIN_SUCCESS
 } from './constants'
 
-const backend = 'https://bookfriends-server.herokuapp.com/'
+// const backend = 'https://bookfriends-server.herokuapp.com/'
+const backend = 'http://localhost:3000/'
 
 //books
 export const setSearchChange = (text) =>({
@@ -18,7 +19,7 @@ export const onSubmitBook = () => (dispatch, getState) => {
 	dispatch({type:REQUEST_BOOK_PENDING})
 	fetch("https://www.googleapis.com/books/v1/volumes?q=" + getState().searchChange.input + '&maxResults=10') //getstate to take a state from an other reducer
     .then(res => res.json())
-    .then(data => {dispatch({type:REQUEST_BOOK_SUCCESS, payload:data.items}) 
+    .then(data => {dispatch({type:REQUEST_BOOK_SUCCESS, payload:{data:data.items, search:getState().searchChange.input}}) 
     	console.log(data)})
     .catch(err => dispatch({type:REQUEST_BOOK_FAILED, payload:err}))
 }
@@ -35,8 +36,8 @@ export const onSubmitBookById = (bookid) => (dispatch) => {
 export const resetBookList = () =>({
 	type: 'ON_RESET_BOOK',
 })
-
-//add a book to the db 
+//book toread
+//add a book to the db book to read
 export const addBook = (book) => (dispatch, getState) => {
 	const email = getState().Authentication.user.email;
 	const token = localStorage.getItem('token')
@@ -74,7 +75,7 @@ export const addBook = (book) => (dispatch, getState) => {
 }
 //get book from bookid : https://www.googleapis.com/books/v1/volumes/
 
-//get the user s booklist
+//get the user s booklist to read
 
 const getUserBookList = (email, token) => (dispatch, getState) => {
 	dispatch({type:'GET_USER_BOOKLIST_PENDING'})
@@ -113,6 +114,82 @@ export const delBook = (bookid) => (dispatch, getState) => {
 	})
 }
 
+//book reading
+export const addBookReading = (book) => (dispatch, getState) => {
+	const email = getState().Authentication.user.email;
+	const token = localStorage.getItem('token')
+	const description = book.description.length > 40 ? book.description.substring(0, 40) + '...' : book.description;
+	dispatch({type:'ADD_BOOK_READING_PENDING'})
+	fetch(`${backend}addbookreading`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': token
+		},
+		body: JSON.stringify({
+			email, 
+			bookID:book.bookid,
+			title:book.title, 
+			authors:book.authors, 
+			description:description
+		})
+	})
+	.then(res => res.json())
+	.then(data => {
+		if(data === 'too much book'){
+			dispatch({type:'ADD_BOOK_READING_FAIL'})
+			setTimeout(() => {
+				dispatch({ type: 'HIDE_NOTIFICATION_READING' })
+			}, 3000)
+		}
+		else {
+			dispatch(getUserBookList(email, token))
+			dispatch({type:'ADD_BOOK_READING_SUCCESS', payload:data})
+			setTimeout(() => {
+				dispatch({ type: 'HIDE_NOTIFICATION_READING' })
+			}, 3000)
+		}
+	})
+}
+
+//get the user s booklist to read
+
+const getUserBookListReading = (email, token) => (dispatch, getState) => {
+	dispatch({type:'GET_USER_BOOKLIST_READING_PENDING'})
+	fetch(`${backend}getbookreading`, {
+		method: 'POST',
+		headers:{
+			'Content-Type': 'application/json',
+			'Authorization': token || localStorage.getItem('token')
+		},
+		body: JSON.stringify({email})
+	})
+	.then(res => res.json())
+	.then(data => {
+		console.log('booklist :', data)
+		dispatch({type:'GET_USER_BOOKLIST_READING_SUCCESS', payload: data})
+	})
+}
+
+//del a book in the booklist reading
+
+export const delBookReading = (bookid) => (dispatch, getState) => {
+	fetch(`${backend}delbookreading`, {
+		method:'POST',
+		headers:{
+			'Content-Type': 'application/json',
+			'Authorization': localStorage.getItem('token')
+		},
+		body: JSON.stringify({email: getState().Authentication.user.email,bookid})
+	})
+	.then(res => res.json())
+	.then(data => {
+		dispatch({type:'DEL_BOOK_READING_SUCCESS_SHOW', payload:bookid})
+		setTimeout(() => {
+			dispatch({ type: 'DEL_BOOK_READING_SUCCESS_HIDE' })
+		}, 3000)
+	})
+}
 
 //get the route
 export const onRouteChange = (route) => ({
@@ -150,6 +227,7 @@ export const authSignin = (user) => (dispatch) => {
 					return dispatch({type:'LOGIN_FAIL', payload:'wrong credentials'})
 				}
 				dispatch(getUserBookList(data.email, token))
+				dispatch(getUserBookListReading(data.email, token))
 				dispatch({type:LOGIN_SUCCESS, payload: {data, token} })
 				console.log(data)
 			})
@@ -177,6 +255,7 @@ export const loadUser = () => (dispatch) =>{
 			return dispatch({type:'AUTH_ERROR', payload:'wrong credentials'})
 		}
 		dispatch(getUserBookList(data.email))
+		dispatch(getUserBookListReading(data.email))
 		dispatch({type:'USER_LOADED', payload: data })
 		console.log(data)
 	})

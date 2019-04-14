@@ -7,7 +7,8 @@ import Book from '../Book/Book'
     return{
     	bookList: state.onSubmitBook.bookList,
 		isPending: state.onSubmitBook.isPending,
-		error: state.onSubmitBook.error
+		error: state.onSubmitBook.error,
+		search: state.onSubmitBook.search
     }
 }
 
@@ -29,8 +30,11 @@ class BookList extends React.Component{
 		:
 		<Preloader className='preloader' size="big" />
 	return(
-		<div className='row container bg-white'>
-			{books}
+		<div className='container'>
+			<h4>Result for {this.props.search} : </h4>
+			<div className='row'>
+				{books}
+			</div>
 		</div>
 		)
 	}

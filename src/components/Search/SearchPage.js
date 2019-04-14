@@ -6,7 +6,6 @@ import {Preloader} from 'react-materialize';
 
 import { loadUser } from '../../actions'
 
-import Search from './Search'
 import BookList from '../BookList/BookList'
 
 const mapDispatchToProps = dispatch => {
@@ -37,7 +36,6 @@ class SearchPage extends React.Component {
     render(){
         const isConnect = 
             <div>
-                <Search />
                 {this.props.isPending?
                     (<Preloader className='preloader' size="big" />)
                     :

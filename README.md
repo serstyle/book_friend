@@ -7,7 +7,7 @@ delete book of to read // done (try to find bugs)
 
 
 -reading
-- add book reading from to read (delete in db of to read and add to the reading db)
+- add book reading from to read (delete in db of to read and add to the reading db) !!!!!
 
 
 
@@ -15,9 +15,9 @@ delete book of to read // done (try to find bugs)
 - add book already from reading (delete in the to read db and add to the already read db))
 
 
-setting to modifiate name and see other stuff being able to add age and some other stuff !!!!
+setting to modifiate name and see other stuff being able to add age and some other stuff // done (try find bug)
 
 
-make the search bar in the nav bar so accessible from everywhere on the website if authenticate.
+make the search bar in the nav bar so accessible from everywhere on the website if authenticate. // done
 
 have nice home auth page (with last activities)

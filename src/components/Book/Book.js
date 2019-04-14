@@ -11,10 +11,11 @@ class Book extends React.Component{
 	}
 
 	render(){
+		const isBookReadingList = this.props.userBookListReading.filter(e => e.bookid === this.props.bookid).length > 0
 		const addBook = 
 		<div>
 			{
-				this.props.userBookList.filter(e => e.bookid === this.props.bookid).length > 0?
+				this.props.userBookList.filter(e => e.bookid === this.props.bookid).length > 0 || isBookReadingList?
 				<Button
 						floating
 						className="green"
@@ -33,13 +34,13 @@ class Book extends React.Component{
 		return(
 			<div>
 				<div>
-					<div className="card horizontal">
+					<div className="card horizontal hoverable">
 						<div className="card-image">
 							<img src={this.props.image} alt='cover' />
 						</div>
 						<div className="card-stacked">
 							<div className="card-content">
-								<h5>{this.props.title.length > 40 ? this.props.title.substring(0, 40) + '...' : this.props.title}</h5>
+								<h6 style={{'font-weight': 'bold'}}>{this.props.title.length > 40 ? this.props.title.substring(0, 40) + '...' : this.props.title}</h6>
 								<p>author: {this.props.authors}</p>
 								{this.props.isError && this.props.bookid ?
 									<p className='error-booklist'>error</p>
@@ -73,6 +74,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
 	return{
 		userBookList: state.userBookList.bookList,
+		userBookListReading: state.userBookList.bookListReading,
 		isPending: state.userBookList.isPending
 	}
 }

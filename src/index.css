@@ -29,6 +29,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 } */
+
+.container{
+  margin-top: 50px;
+  background-color: white;
+  /* padding: 20px; */
+  padding: 4rem 2rem;
+  min-height: 400px;
+  border-radius: 0.3rem;
+}
+
 .main-container{
   margin: 0;
   position: absolute;
@@ -134,8 +144,51 @@ code {
   display: flex;
 }
 
+.collection .collection-item.avatar .title {
+  font-weight: bold;
+}
+
+.authors{
+  font-style: italic;
+}
+
 .input-title{
   margin: auto;
+}
+
+nav ul a{
+  padding: 0 5px;
+}
+nav .input-field {
+  margin: 0;
+  height: auto;
+}
+
+nav .input-field input[type=search]{
+  color: white;
+}
+
+.nav-button-item{
+  /* border: none;
+  background-color: transparent;
+  color: white; 
+  font-family: 'Work Sans', sans-serif; */
+  background: none;
+	border: none;
+	font: inherit;
+  outline: none;
+  -webkit-transition: background-color .3s;
+  transition: background-color .3s;
+  font-size: 1rem;
+  color: #fff;
+  display: block;
+  padding: 0 15px;
+  cursor: pointer;
+}
+
+
+.profile-row{
+  margin-top: 35px;
 }
 
 @media only screen and (min-width: 993px){

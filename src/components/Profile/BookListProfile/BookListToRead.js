@@ -21,7 +21,7 @@ class BookListToRead extends React.Component{
                         )
                     })
                     :
-                    <p>Search book and start adding books !</p>
+                    <p style={{'text-align': 'center'}}>Search book and start adding books !</p>
     )
         return(
             

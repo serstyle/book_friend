@@ -28,7 +28,7 @@ class HomeAuth extends React.Component {
                             <hr />
                             <Search />
                             <p style={{fontStyle:'italic'}}>{this.props.bookList.length === 0 && this.props.bookListReading.length === 0?'Add some book to your list by using the search barre!': null}</p>
-                            <h6>You have {this.props.bookList.length} books to read ! </h6>
+                            <h6>You have {this.props.bookList.length} books to read !</h6>
                             <h6>You are curently reading {this.props.bookListReading.length} books !</h6>
                         </div>
                     }

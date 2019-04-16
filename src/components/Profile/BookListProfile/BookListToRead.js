@@ -8,6 +8,9 @@ class BookListToRead extends React.Component{
 
     render(){
     const bookItem = (
+        this.props.isPending?
+                    <Preloader className='preloader' size="big" />
+                    :
         this.props.bookList.length?
                     this.props.bookList.map((book, i) =>{
                         return(
@@ -21,16 +24,14 @@ class BookListToRead extends React.Component{
                         )
                     })
                     :
-                    <p style={{'text-align': 'center'}}>Search book and start adding books !</p>
+                    <p style={{'textAlign': 'center'}}>Search book and start adding books !</p>
     )
         return(
             
                 <Col l={4} m={12} s={12}>
                     <Collection className='white collection-list'>
                     <CollectionItem><h4>Book To Read</h4></CollectionItem>
-                    {this.props.isPending?
-                    <Preloader className='preloader' size="big" />
-                    :
+                    {
                     bookItem
                     }
                     </Collection>

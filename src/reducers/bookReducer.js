@@ -46,11 +46,13 @@ export const onSubmitBook = (state=initialStateBook, action={})=>{
 const initialStateAddBook = {
 	isPending: false,
 	isPendingBookReading: false,
+	isPendingBookFinish: false,
 	isError: false,
 	isSuccess:false,
 	error:'',
 	bookList:[],
 	bookListReading:[],
+	bookListFinish:[],
 	isShowingNotification:false
 }
 
@@ -86,7 +88,7 @@ export const userBookList = (state = initialStateAddBook, action={})=>{
 		case 'HIDE_NOTIFICATION_READING':
 			return {...state, isError:false, isSuccess:false, isShowingNotification:false}
 		
-		case 'GET_USER_BOOKLIST_READUING_PENDING':
+		case 'GET_USER_BOOKLIST_READING_PENDING':
 			return {...state, isPendingBookReading:true}
 		case 'GET_USER_BOOKLIST_READING_SUCCESS':
 			return{...state, bookListReading:action.payload, isError:false, isPendingBookReading:false}
@@ -97,7 +99,30 @@ export const userBookList = (state = initialStateAddBook, action={})=>{
 			})}
 		case 'DEL_BOOK_READING_SUCCESS_HIDE':
 			return{...state, isShowingNotification:false, isSuccess:false, isError:false}
-			
+		
+			// BOOK IN THE READING LIST
+		case 'ADD_BOOK_FINISH_PENDING':
+			return {...state, isPendingBookFinish:true, isError:false}
+		case 'ADD_BOOK_FINISH_SUCCESS':
+			return{...state, isPendingBookFinish:false, isError:false, isSuccess:true, bookListFinish:action.payload}
+		case 'ADD_BOOK_FINISH_FAIL':
+			return{...state, isPendingBookFinish:false, isError:true, isSuccess:false}
+		case 'HIDE_NOTIFICATION_FINISH':
+			return {...state, isError:false, isSuccess:false, isShowingNotification:false}
+		
+		case 'GET_USER_BOOKLIST_FINISH_PENDING':
+			return {...state, isPendingBookFinish:true}
+		case 'GET_USER_BOOKLIST_FINISH_SUCCESS':
+			return{...state, bookListFinish:action.payload, isError:false, isPendingBookFinish:false}
+		
+		case 'DEL_BOOK_FINISH_SUCCESS_SHOW':
+			return{...state, isError:false, isShowingNotification:true, isSuccess:false, isPendingFinish:false, bookListFinish:state.bookListFinish.filter(book =>{
+				return book.bookid !== action.payload
+			})}
+		case 'DEL_BOOK_FINISH_SUCCESS_HIDE':
+			return{...state, isShowingNotification:false, isSuccess:false, isError:false}
+		case 'ON_RESET_BOOK':
+			return {...state, bookList:[], bookListReading:[], bookListFinish:[]}
 
 		default:
 			return state
@@ -117,7 +142,7 @@ export const requestBookById = (state=initialBookById, action={}) => {
 		case 'REQUEST_BOOKID_SUCCESS':
 			return{...state, isPending:false, err:false, book:action.payload}
 		case 'REQUEST_BOOKID_FAIL':
-			return{...state, isPending:false, err:true}
+			return{...state, isPending:false, err:true, book:{}}
 		default:
 			return state
 	}

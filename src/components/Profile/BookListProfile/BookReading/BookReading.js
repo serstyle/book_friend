@@ -1,13 +1,14 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {onSubmitBookById, delBookReading} from '../../../../actions'
+import {Link} from 'react-router-dom'
+import {onSubmitBookById, delBookReading, addBookFinish} from '../../../../actions'
 import {CollectionItem, Modal, Button, Preloader} from 'react-materialize'
 
 class BookReading extends React.Component{
     render(){
         const {title, authors, description, bookid} = this.props
         const bookDescription = (
-            this.props.isPending?
+            this.props.isPending || this.props.err?
                 <Preloader className='preloader' size="big" />
             :
                 this.props.book.volumeInfo.description?
@@ -24,14 +25,22 @@ class BookReading extends React.Component{
                 <p>{description}</p>
                 <div className='bottom-book'>
                     <Modal
-                        modalOptions={{
+                        options={{
                             preventScrolling:false,
                             onOpenStart:() => this.props.requestBook(bookid)
                             }}
                         header={title}
                         trigger={<Button>See more</Button>}>
                         {bookDescription}
+                        <br />
+                        <Link to={`/book/${bookid}`}>See more</Link>
                     </Modal>
+                    <Button
+                        onClick={()=>this.props.addBookFinish(this.props)}
+                        floating
+                        className="green"
+                        icon="add"
+                    />
                     <Button
                         onClick={()=>this.props.delBook(bookid)}
                         floating
@@ -47,14 +56,16 @@ class BookReading extends React.Component{
 const mapDispatchToProps = dispatch =>{
     return{
         requestBook: (bookid)=>dispatch(onSubmitBookById(bookid)),
-        delBook: (bookid)=> dispatch(delBookReading(bookid))
+        delBook: (bookid)=> dispatch(delBookReading(bookid)),
+        addBookFinish: (book) =>dispatch(addBookFinish(book))
     }
 }
 
 const mapStateToProps = state =>{
     return{
         book:state.requestBookById.book,
-        isPending:state.requestBookById.isPending
+        isPending:state.requestBookById.isPending,
+        err: state.requestBookById.err
     }
 }
 

@@ -6,6 +6,7 @@ import Home from './components/Home/Home'
 import Profile from './components/Profile/Profile'
 import SearchPage from './components/Search/SearchPage'
 import Settings from './components/Settings/Settings'
+import BookPage from './components/BookPage/BookPage'
 
 import { loadUser } from './actions'
 
@@ -38,6 +39,7 @@ class App extends Component {
                 <Route path='/profile' render={(props) => <Profile {...props} />} />
                 <Route path='/search' render={(props) => <SearchPage {...props} />} />
                 <Route path='/settings' render={(props) => <Settings {...props} />} />
+                <Route path='/book/:book' render={(props) => <BookPage {...props} />} />
               </Switch>
           </div>
         </BrowserRouter> 

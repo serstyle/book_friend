@@ -28,8 +28,13 @@ export const onSubmitBookById = (bookid) => (dispatch) => {
 	dispatch({type:'REQUEST_BOOKID_PENDING'})
 	fetch(`https://www.googleapis.com/books/v1/volumes/${bookid}`) //getstate to take a state from an other reducer
     .then(res => res.json())
-    .then(data => {dispatch({type:'REQUEST_BOOKID_SUCCESS', payload:data}) 
-    	console.log(data)})
+    .then(data => {
+			if(data.error){
+				dispatch({type:'REQUEST_BOOKID_FAIL'})
+			}else{
+				dispatch({type:'REQUEST_BOOKID_SUCCESS', payload:data})
+			}
+		})
     .catch(err => dispatch({type:'REQUEST_BOOKID_FAIL', payload:err}))
 }
 
@@ -191,11 +196,82 @@ export const delBookReading = (bookid) => (dispatch, getState) => {
 	})
 }
 
-//get the route
-export const onRouteChange = (route) => ({
-	type: 'ON_ROUTE_CHANGE',
-	payload: route
-})
+//book finish
+export const addBookFinish = (book) => (dispatch, getState) => {
+	const email = getState().Authentication.user.email;
+	const token = localStorage.getItem('token')
+	const description = book.description.length > 40 ? book.description.substring(0, 40) + '...' : book.description;
+	dispatch({type:'ADD_BOOK_FINISH_PENDING'})
+	fetch(`${backend}addbookfinish`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': token
+		},
+		body: JSON.stringify({
+			email, 
+			bookID:book.bookid,
+			title:book.title, 
+			authors:book.authors, 
+			description:description
+		})
+	})
+	.then(res => res.json())
+	.then(data => {
+		if(data === 'too much book'){
+			dispatch({type:'ADD_BOOK_FINISH_FAIL'})
+			setTimeout(() => {
+				dispatch({ type: 'HIDE_NOTIFICATION_FINISH' })
+			}, 3000)
+		}
+		else {
+			dispatch(getUserBookListReading(email, token))
+			dispatch({type:'ADD_BOOK_FINISH_SUCCESS', payload:data})
+			setTimeout(() => {
+				dispatch({ type: 'HIDE_NOTIFICATION_FINISH' })
+			}, 3000)
+		}
+	})
+}
+
+//get the user s booklist finish
+
+const getUserBookListFinish = (email, token) => (dispatch, getState) => {
+	dispatch({type:'GET_USER_BOOKLIST_FINISH_PENDING'})
+	fetch(`${backend}getbookfinish`, {
+		method: 'POST',
+		headers:{
+			'Content-Type': 'application/json',
+			'Authorization': token || localStorage.getItem('token')
+		},
+		body: JSON.stringify({email})
+	})
+	.then(res => res.json())
+	.then(data => {
+		console.log('booklist :', data)
+		dispatch({type:'GET_USER_BOOKLIST_FINISH_SUCCESS', payload: data})
+	})
+}
+
+//del a book in the booklist finish
+
+export const delBookFinish = (bookid) => (dispatch, getState) => {
+	fetch(`${backend}delbookfinish`, {
+		method:'POST',
+		headers:{
+			'Content-Type': 'application/json',
+			'Authorization': localStorage.getItem('token')
+		},
+		body: JSON.stringify({email: getState().Authentication.user.email,bookid})
+	})
+	.then(res => res.json())
+	.then(data => {
+		dispatch({type:'DEL_BOOK_FINISH_SUCCESS_SHOW', payload:bookid})
+		setTimeout(() => {
+			dispatch({ type: 'DEL_BOOK_FINISH_SUCCESS_HIDE' })
+		}, 3000)
+	})
+}
 
 //auth
 
@@ -228,6 +304,7 @@ export const authSignin = (user) => (dispatch) => {
 				}
 				dispatch(getUserBookList(data.email, token))
 				dispatch(getUserBookListReading(data.email, token))
+				dispatch(getUserBookListFinish(data.email, token))
 				dispatch({type:LOGIN_SUCCESS, payload: {data, token} })
 				console.log(data)
 			})
@@ -256,6 +333,7 @@ export const loadUser = () => (dispatch) =>{
 		}
 		dispatch(getUserBookList(data.email))
 		dispatch(getUserBookListReading(data.email))
+		dispatch(getUserBookListFinish(data.email))
 		dispatch({type:'USER_LOADED', payload: data })
 		console.log(data)
 	})
@@ -340,4 +418,47 @@ export const updateUser = (user) => (dispatch, getState) => {
 
 export const close_modal = () => ({
 	type:'CLOSE_MODAL_SUCCESS'
+})
+
+export const addReview = (data) => (dispatch) => {
+	const token = localStorage.getItem('token');
+	const {bookid, email, note, review} = data
+	dispatch({type:'ADD_REVIEW_PENDING'})
+	fetch(`${backend}addreview`, {
+		method:'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization' : token
+		},
+		body: JSON.stringify({bookid, email, note, review})
+	})
+	.then(res=> res.json())
+	.then(data =>{
+		dispatch({type:'ADD_REVIEW_SUCCESS', payload:data})
+		setTimeout(()=>{
+			dispatch({type:'ADD_REVIEW_HIDE_NOTIF'})
+		}, 3000)
+	})
+	.catch(err => dispatch({type:'ADD_REVIEW_FAILED'}))
+}
+
+export const getReviews = (bookid) => (dispatch) => {
+	console.log(bookid)
+	dispatch({type:'GET_REVIEWS_PENDING'})
+	fetch(`${backend}getreview`, {
+		method:'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({bookid})
+	})
+	.then(res=> res.json())
+	.then(data => {
+		dispatch({type:'GET_REVIEWS_SUCCESS', payload:data})
+	})
+	.catch(err => dispatch({type:'GET_REVIEWS_FAILED', payload:err}))
+}
+
+export const addReviewToggleContainer = dispatch => ({
+	type: 'ADD_REVIEW_TOGGLE_CONTAINER'
 })

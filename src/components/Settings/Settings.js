@@ -1,9 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router'
-import { onRouteChange, loadUser, updateUser } from '../../actions'
+import {  loadUser, updateUser } from '../../actions'
 
-import { Button } from 'react-materialize';
+import { Button, Preloader } from 'react-materialize';
 
 class Settings extends React.Component {
     state = {
@@ -14,7 +14,6 @@ class Settings extends React.Component {
         isSuccess:false
     }
     componentDidMount(){
-        this.props.onRouteChange(this.props.location.pathname)
         const {loadUser} = this.props
         loadUser()
     }
@@ -23,7 +22,7 @@ class Settings extends React.Component {
         e.preventDefault()
         let {name, city, age} = this.state;
         
-        if(name.length || age.length || city.length){
+        if((name.length && name.length < 20 )|| age.length || city.length){
             this.props.updateUser({
                 email:this.props.user.email,
                 name:name,
@@ -67,15 +66,15 @@ class Settings extends React.Component {
                         <div class="row">
                             <div class="input-field col s12">
                                 <input onChange={this.inputChange} value={this.state.name} id="name" type="text" class="validate"/>
-                                <label for="name">Your name is '{this.props.user.name}'</label>
+                                <label for="name">Your name is {this.props.user.name}</label>
                             </div>
                             <div class="input-field col s12">
                                 <input onChange={this.inputChange} value={this.state.age} id="age" type="text" class="validate"/>
-                                <label for="age">Your age is '{this.props.user.age}'</label>
+                                <label for="age">Your age is {this.props.user.age?this.props.user.age:'not defined yet'}</label>
                             </div>
                             <div class="input-field col s12">
                                 <input onChange={this.inputChange} value={this.state.city} id="city" type="text" class="validate"/>
-                                <label for="city">Your city is '{this.props.user.city}'</label>
+                                <label for="city">Your city is {this.props.user.city?this.props.user.city:'not defined yet'}</label>
                             </div>
                         </div>
                         <Button>Save</Button>
@@ -86,9 +85,12 @@ class Settings extends React.Component {
             :
             <Redirect to='/' />
             return(
-                <div>
+                <div className='container'>
                 {this.state.isError?
-                        <p className='alert alert-danger'>Please fill one field before submit !</p>
+                        this.state.name.length < 20?
+                            <p className='alert alert-danger'>Please fill one field before submit !</p>
+                            :
+                            <p className='alert alert-danger'>Your name needs to contain less than 20 characters !</p>
                         :
                         null
                 }
@@ -99,7 +101,7 @@ class Settings extends React.Component {
                 }
                 {
                     this.props.isLoading?
-                    <p>wait</p>
+                    <Preloader className="preloader" />
                     :
                     [settings]
                 }
@@ -111,7 +113,6 @@ class Settings extends React.Component {
 
 const mapDispatchToProps = dispatch =>{
     return {
-        onRouteChange:(route) => dispatch(onRouteChange(route)),
         loadUser: ()=>dispatch(loadUser()),
         updateUser: (user)=>dispatch(updateUser(user))
     }

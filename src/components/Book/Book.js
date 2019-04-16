@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {addBook} from '../../actions'
 import {Button, Modal} from 'react-materialize'
 
@@ -40,7 +41,7 @@ class Book extends React.Component{
 						</div>
 						<div className="card-stacked">
 							<div className="card-content">
-								<h6 style={{'font-weight': 'bold'}}>{this.props.title.length > 40 ? this.props.title.substring(0, 40) + '...' : this.props.title}</h6>
+								<h6 style={{'fontWeight': 'bold'}}>{this.props.title.length > 40 ? this.props.title.substring(0, 40) + '...' : this.props.title}</h6>
 								<p>author: {this.props.authors}</p>
 								{this.props.isError && this.props.bookid ?
 									<p className='error-booklist'>error</p>
@@ -51,10 +52,12 @@ class Book extends React.Component{
 							<div className="card-action">
 								{addBook}
 								<Modal
-									modalOptions={{preventScrolling:false}}
+									options={{preventScrolling:false}}
 									header={this.props.title}
 									trigger={<Button>ABOUT</Button>}>
 									<p>{this.props.description}</p>
+									<br />
+                        			<Link to={`/book/${this.props.bookid}`}>See more</Link>
 								</Modal>
 							</div>
 						</div>

@@ -3,9 +3,6 @@ import {connect} from 'react-redux'
 
 import {Preloader} from 'react-materialize';
 
-import Search from '../Search/Search'
-
-
 const mapStateToProps = state =>{
     return{
       bookList: state.userBookList.bookList,
@@ -25,8 +22,8 @@ class HomeAuth extends React.Component {
                         :
                         <div>
                             <h1 className='center-align'>Hello {this.props.user.name} !</h1>
-                            <hr />
-                            <Search />
+                            <hr style={{'margin':'30px'}}/>
+                            
                             <p style={{fontStyle:'italic'}}>{this.props.bookList.length === 0 && this.props.bookListReading.length === 0?'Add some book to your list by using the search barre!': null}</p>
                             <h6>You have {this.props.bookList.length} books to read !</h6>
                             <h6>You are curently reading {this.props.bookListReading.length} books !</h6>

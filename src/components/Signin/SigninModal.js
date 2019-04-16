@@ -18,12 +18,12 @@ class SigninModal extends React.Component{
 
             }}
             trigger={
-                <button className='btn-flat nav-button-item'>
+                <button className={this.props.buttonSigninStyle}>
                     Sign in
                 </button>
                 }
             > 
-            <Signin /> 
+            <Signin emailId={this.props.emailId} passwordId={this.props.passwordId}/> 
         </Modal>
         )
     }

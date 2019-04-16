@@ -17,12 +17,12 @@ class RegisterModal extends React.Component{
                 onCloseStart:()=>this.props.close_modal()
                 }}
             trigger={
-                <button className='btn-flat nav-button-item'>
+                <button className={this.props.buttonRegisterStyle}>
                     Register
                 </button>
                 } 
             >
-            <Register /> 
+            <Register  emailId={this.props.emailId} passwordId={this.props.passwordId} nameId={this.props.nameId}/> 
         </Modal>
         )
     }

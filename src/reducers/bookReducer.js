@@ -70,7 +70,7 @@ export const userBookList = (state = initialStateAddBook, action={})=>{
 		case 'GET_USER_BOOKLIST_SUCCESS':
 			return{...state, bookList:action.payload, isError:false, isPending:false}
 		case 'DEL_BOOK_SUCCESS_SHOW':
-			return{...state, isError:false, isShowingNotification:true, isPending:false, bookList:state.bookList.filter(book =>{
+			return{...state, isError:false, isShowingNotification:true, isSuccess:false, isPending:false, bookList:state.bookList.filter(book =>{
 				return book.bookid !== action.payload
 			})}
 		case 'DEL_BOOK_SUCCESS_HIDE':
@@ -84,7 +84,7 @@ export const userBookList = (state = initialStateAddBook, action={})=>{
 		case 'ADD_BOOK_READING_FAIL':
 			return{...state, isPendingBookReading:false, isError:true, isSuccess:false}
 		case 'HIDE_NOTIFICATION_READING':
-			return {...state, isError:false, isSuccess:false}
+			return {...state, isError:false, isSuccess:false, isShowingNotification:false}
 		
 		case 'GET_USER_BOOKLIST_READUING_PENDING':
 			return {...state, isPendingBookReading:true}
@@ -92,11 +92,11 @@ export const userBookList = (state = initialStateAddBook, action={})=>{
 			return{...state, bookListReading:action.payload, isError:false, isPendingBookReading:false}
 		
 		case 'DEL_BOOK_READING_SUCCESS_SHOW':
-			return{...state, isError:false, isShowingNotification:true, isPendingReading:false, bookListReading:state.bookListReading.filter(book =>{
+			return{...state, isError:false, isShowingNotification:true, isSuccess:false, isPendingReading:false, bookListReading:state.bookListReading.filter(book =>{
 				return book.bookid !== action.payload
 			})}
 		case 'DEL_BOOK_READING_SUCCESS_HIDE':
-			return{...state, isShowingNotification:false}
+			return{...state, isShowingNotification:false, isSuccess:false, isError:false}
 			
 
 		default:

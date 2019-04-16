@@ -12,10 +12,9 @@ class SigninModal extends React.Component{
         <Modal 
             id='signin' 
             header='Signin'
-            modalOptions={{
+            options={{
                 preventScrolling:false,
                 onCloseStart:()=>this.props.close_modal()
-
             }}
             trigger={
                 <button className={this.props.buttonSigninStyle}>

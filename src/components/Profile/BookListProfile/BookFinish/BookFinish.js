@@ -1,10 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {onSubmitBookById, delBook, addBookReading} from '../../../../actions'
+import {onSubmitBookById, delBookFinish} from '../../../../actions'
 import {CollectionItem, Modal, Button, Preloader} from 'react-materialize'
 
-class BookToRead extends React.Component{
+class BookFinish extends React.Component{
     render(){
         const {title, authors, description, bookid} = this.props
         const bookDescription = (
@@ -27,7 +27,7 @@ class BookToRead extends React.Component{
                     <Modal
                         options={{
                             preventScrolling:false,
-                            onOpenStart:()=>this.props.requestBook(bookid)
+                            onOpenStart:() => this.props.requestBook(bookid)
                             }}
                         header={title}
                         trigger={<Button>See more</Button>}>
@@ -35,12 +35,6 @@ class BookToRead extends React.Component{
                         <br />
                         <Link to={`/book/${bookid}`}>See more</Link>
                     </Modal>
-                    <Button
-                        onClick={()=>this.props.addBookReading(this.props)}
-                        floating
-                        className="green"
-                        icon="add"
-                    />
                     <Button
                         onClick={()=>this.props.delBook(bookid)}
                         floating
@@ -56,8 +50,7 @@ class BookToRead extends React.Component{
 const mapDispatchToProps = dispatch =>{
     return{
         requestBook: (bookid)=>dispatch(onSubmitBookById(bookid)),
-        delBook: (bookid)=> dispatch(delBook(bookid)),
-        addBookReading: (book) =>dispatch(addBookReading(book))
+        delBook: (bookid)=> dispatch(delBookFinish(bookid))
     }
 }
 
@@ -69,4 +62,4 @@ const mapStateToProps = state =>{
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BookToRead)
+export default connect(mapStateToProps, mapDispatchToProps)(BookFinish)

@@ -2,16 +2,16 @@ import React from 'react';
 import {connect} from 'react-redux'
 import {Col, Collection, CollectionItem, Preloader} from 'react-materialize'
 
-import BookReading from './BookReading/BookReading'
+import BookFinish from './BookFinish/BookFinish'
 
-class BookListReading extends React.Component{
+class BookListFinish extends React.Component{
 
     render(){
         const bookItem = (
             this.props.bookList.length?
                         this.props.bookList.map((book, i) =>{
                             return(
-                                <BookReading 
+                                <BookFinish 
                                     key={i}
                                     title={book.title}
                                     authors={book.authors}
@@ -21,13 +21,13 @@ class BookListReading extends React.Component{
                             )
                         })
                         :
-                        <p style={{'textAlign': 'center'}}>Add book from your Book To Read list !</p>
+                        <p style={{'textAlign': 'center'}}>Add book from your Currently Reading list !</p>
         )
             return(
                 
                     <Col l={4} m={12} s={12}>
                         <Collection className='white collection-list'>
-                        <CollectionItem><h4>Currently Reading</h4></CollectionItem>
+                        <CollectionItem><h4>Already Read</h4></CollectionItem>
                         {this.props.isPending?
                         <Preloader className='preloader' size="big" />
                         :
@@ -42,9 +42,9 @@ class BookListReading extends React.Component{
     
     const mapStateToProps = state => {
         return {
-            bookList: state.userBookList.bookListReading,
-            isPending: state.userBookList.isPendingReading
+            bookList: state.userBookList.bookListFinish,
+            isPending: state.userBookList.isPendingFinish
         }
     }
 
-    export default connect(mapStateToProps)(BookListReading);
+    export default connect(mapStateToProps)(BookListFinish);

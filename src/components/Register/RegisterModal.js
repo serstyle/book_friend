@@ -12,7 +12,7 @@ class RegisterModal extends React.Component{
             <Modal 
             id='register' 
             header='Register'
-            modalOptions={{
+            options={{
                 preventScrolling:false,
                 onCloseStart:()=>this.props.close_modal()
                 }}

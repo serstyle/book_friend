@@ -29,20 +29,16 @@ class SearchPage extends React.Component {
         this.props.loadUser()
     }
 
-    displayError = () => {
-        
-    }
-
     render(){
         const isConnect = 
-            <div>
+            <div className='container'>
                 {this.props.isPending?
                     (<Preloader className='preloader' size="big" />)
                     :
                     this.props.bookList?
                         <BookList />
                         :
-                        <p>Start Searching a book</p>}
+                        <p className="center-align">Use the Search barre to search a book from the Google Books API </p>}
             </div>
 
         return(

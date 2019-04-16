@@ -2,18 +2,16 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router'
 
-import {onRouteChange} from '../../actions'
 import { loadUser } from '../../actions'
 
 import {Row, Preloader} from 'react-materialize'
 
 import BookListToRead from './BookListProfile/BookListToRead'
-import BookFinish from './BookListProfile/BookFinish'
+import BookListFinish from './BookListProfile/BookListFinish'
 import BookListReading from './BookListProfile/BookListReading'
 
 const mapDispatchToProps = (dispatch) =>{
         return{
-                onRouteChange:(route) => dispatch(onRouteChange(route)),
                 loadUser: ()=>dispatch(loadUser())
         }
 }
@@ -25,12 +23,12 @@ const mapStateToProps= (state) =>{
         userBookList: state.userBookList.bookList,
         isNotification: state.userBookList.isShowingNotification,
         isError:state.userBookList.isError,
-        isSuccess:state.userBookList.isSuccess
+        isSuccess:state.userBookList.isSuccess,
+        isBookPending: state.requestBookById.isPending
 }
 }
 class Profile extends React.Component{
         componentDidMount(){
-                this.props.onRouteChange(this.props.location.pathname)
                 this.props.loadUser()
         }
         handleBook = () => {
@@ -59,14 +57,14 @@ class Profile extends React.Component{
                                 null
                         }
                         {
-                        this.props.isLoading?
+                        this.props.isLoading ?
                                 <Preloader className='preloader' size="big" />
                                 :
                                 this.props.isAuthenticate?
                                         <Row className='profile-row'>
                                                 <BookListToRead />
                                                 <BookListReading />
-                                                <BookFinish />
+                                                <BookListFinish />
                                         </Row>
                                         :
                                         <Redirect to='/' />

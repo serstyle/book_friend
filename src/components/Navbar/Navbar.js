@@ -72,7 +72,6 @@ class Navbar extends React.Component{
 const mapStateToProps= (state) =>{
 	return{
 		isAuthenticate: state.Authentication.isAuthenticate,
-		route: state.onRouteChange.route,
 		isLoading: state.Authentication.isLoading
 }
 }

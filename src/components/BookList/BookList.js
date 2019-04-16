@@ -28,9 +28,9 @@ class BookList extends React.Component{
 				/>)
 		})
 		:
-		<Preloader className='preloader' size="big" />
+		<Preloader className='valign-wrapper, center-align' size="big" />
 	return(
-		<div className='container'>
+		<div>
 			<h4>Result for {this.props.search} : </h4>
 			<div className='row'>
 				{books}

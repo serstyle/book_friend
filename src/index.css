@@ -47,6 +47,10 @@ code {
   transform: translate(-50%, -50%);
 }
 
+input{
+  color: black;
+}
+
 .card.horizontal .card-image img {
     border-radius: 2px 0 0 2px;
     max-width: 100%;
@@ -166,6 +170,8 @@ nav .input-field {
 
 nav .input-field input[type=search]{
   color: white;
+  border-bottom: 1px solid #eaeaea;
+  padding-bottom: 5px;
 }
 
 .nav-button-item{

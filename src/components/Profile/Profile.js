@@ -23,7 +23,9 @@ const mapStateToProps= (state) =>{
         user: state.Authentication.user,
         isLoading: state.Authentication.isLoading,
         userBookList: state.userBookList.bookList,
-        isNotification: state.userBookList.isShowingNotification
+        isNotification: state.userBookList.isShowingNotification,
+        isError:state.userBookList.isError,
+        isSuccess:state.userBookList.isSuccess
 }
 }
 class Profile extends React.Component{
@@ -39,6 +41,20 @@ class Profile extends React.Component{
         	<div>
                         {this.props.isNotification?
                                 <p className='alert alert-danger'>Book Deleted !</p>
+                                :
+                                null
+                        }
+                        {this.props.isError?
+                                <p className='alert alert-danger'>
+                                        The limit of book in a list is 10 !
+                                </p>
+                                :
+                                null
+                        }
+                        {this.props.isSuccess?
+                                <p className='alert alert-success'>
+                                        Book added !
+                                </p>
                                 :
                                 null
                         }

@@ -26,18 +26,18 @@ class Register extends React.Component {
 						}
 						<div className="input-field col s12">
 							<i className="material-icons prefix">email</i>
-							<input id="registerEmail" type="email" required className="validate" onChange={e => this.setState({email:e.target.value}) } />
-							<label htmlFor="registerEmail">Email</label>
+							<input id={this.props.emailId} type="email" required className="validate" onChange={e => this.setState({email:e.target.value}) } />
+							<label htmlFor={this.props.emailId}>Email</label>
 						</div>
 						<div className="input-field col s12">
 							<i className="material-icons prefix">lock</i>
-							<input id="registerPassword" type="password" required className="validate" onChange={e => this.setState({password:e.target.value}) } />
-							<label htmlFor="registerPassword">Password</label>
+							<input id={this.props.passwordId} type="password" required className="validate" onChange={e => this.setState({password:e.target.value}) } />
+							<label htmlFor={this.props.passwordId}>Password</label>
 						</div>
 						<div className="input-field col s12">
 							<i className="material-icons prefix">account_circle</i>
-							<input id="registerName" type="text" required className="validate" onChange={e => this.setState({name:e.target.value}) } />
-							<label htmlFor="registerName">Name</label>
+							<input id={this.props.nameId} type="text" required className="validate" onChange={e => this.setState({name:e.target.value}) } />
+							<label htmlFor={this.props.nameId}>Name</label>
 						</div>
 					</div>
 					<button type='submit' className='btn waves-effect waves-light'>Submit</button>

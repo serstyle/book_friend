@@ -55,10 +55,10 @@ class Navbar extends React.Component{
 						:
 						<ul id="nav-mobile" className="right hide-on-med-and-down">
 							<li>
-								<SigninModal />
+								<SigninModal buttonSigninStyle={'btn-flat nav-button-item'} emailId={'nav_signin_email_id'} passwordId={'nav_signin_password_id'}/>
 							</li>
 							<li>
-								<RegisterModal />
+								<RegisterModal buttonRegisterStyle={'btn-flat nav-button-item'} emailId={'nav_register_email_id'} passwordId={'nav_register_password_id'} nameId={'nav_register_name_id'}/>
 							</li>
 						</ul>
 					}

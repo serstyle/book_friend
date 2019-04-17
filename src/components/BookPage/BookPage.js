@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import {onSubmitBookById, loadUser, getReviews, addReviewToggleContainer} from '../../actions'
+import {Preloader} from 'react-materialize'
 import Book from '../Book/Book'
 import BookReview from './BookReview/BookReview'
 import AddReview from './AddReview/AddReview'
@@ -23,13 +24,13 @@ class BookPage extends React.Component{
             <div className='container'>
                 {
                 this.props.isLoading?
-                    null
+                    <Preloader className='preloader'/>
                     :
                     !this.props.isAuthenticate?
                         <Redirect to='/' />
                         :
                         this.props.isPending?
-                            null
+                            <Preloader className='preloader'/>
                             :
                             this.props.err?
                                 <p>There is no book with this ID, please enter a correct ID</p>

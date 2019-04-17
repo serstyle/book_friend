@@ -462,3 +462,20 @@ export const getReviews = (bookid) => (dispatch) => {
 export const addReviewToggleContainer = dispatch => ({
 	type: 'ADD_REVIEW_TOGGLE_CONTAINER'
 })
+
+export const delReview = (reviewid, email) => (dispatch) => {
+	const token = localStorage.getItem('token');
+	dispatch({type:'DEL_REVIEW_PENDING'})
+	fetch(`${backend}delreview`, {
+		method:'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization' : token
+		},
+		body: JSON.stringify({reviewid, email})
+	})
+	.then(res => res.json())
+	.then(data => {
+		dispatch({type:'DEL_REVIEW_SUCCESS', payload:data})
+	})
+}

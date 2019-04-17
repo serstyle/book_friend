@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {delReview} from '../../../actions'
 
 class BookReview extends React.Component{
 
@@ -11,7 +12,7 @@ class BookReview extends React.Component{
                 this.props.reviews.length?
                 this.props.reviews.map((review, id) => {
                 return(
-                        <tr key={id}>
+                        <tr id={review.id} key={review.id}>
                             <td>
                                 {review.email}
                             </td>
@@ -21,6 +22,14 @@ class BookReview extends React.Component{
                             <td>
                                 {review.note}
                             </td>
+                            {review.email === this.props.user.email?
+                                <td>
+                                    <button onClick={()=>this.props.delReview(review.id, this.props.user.email)} className='btn red'>X</button>
+                                </td>
+                            
+                            :
+                            null
+                            }
                         </tr>
                 )
                 })
@@ -35,6 +44,7 @@ class BookReview extends React.Component{
                             <th>Authors</th>
                             <th>Comments</th>
                             <th>Note</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,8 +60,15 @@ class BookReview extends React.Component{
 const mapStateToProps = state => {
     return{
         isGetPending: state.reviewsBook.isGetPending,
-        reviews: state.reviewsBook.reviews
+        reviews: state.reviewsBook.reviews,
+        user:state.Authentication.user
     }
 }
 
-export default connect(mapStateToProps)(BookReview)
+const mapDispatchToProps = dispatch =>{
+    return{
+        delReview: (reviewid, email) => dispatch(delReview(reviewid, email))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BookReview)

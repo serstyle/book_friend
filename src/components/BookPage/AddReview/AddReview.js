@@ -46,7 +46,7 @@ class AddReview extends React.Component{
                         />
                     </div>
                     <div class="input-field col s12">
-                        <textarea onChange={e => this.setState({review:e.target.value})} id="textarea1" class="materialize-textarea"></textarea>
+                        <textarea onChange={e => this.setState({review:e.target.value})} id="textarea1" class="materialize-textarea" required></textarea>
                         <label for="textarea1">Review</label>
                     </div>
                     <Button>Add</Button>

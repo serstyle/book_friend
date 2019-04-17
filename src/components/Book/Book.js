@@ -15,7 +15,7 @@ class Book extends React.Component{
 		const isBookReadingList = this.props.userBookListReading.filter(e => e.bookid === this.props.bookid).length > 0
 		const addBook = 
 		<div>
-			{
+			{	
 				this.props.userBookList.filter(e => e.bookid === this.props.bookid).length > 0 || isBookReadingList?
 				<Button
 						floating

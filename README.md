@@ -23,7 +23,9 @@ make the search bar in the nav bar so accessible from everywhere on the website 
 have nice home auth page (with last activities) // done but can be improve 
 
 
-being able to let a review and a note to a book (create a table with the NAME and if name change dont forget to modifiate in the db of the author the bookid the review and the note on 5)
+being able to let a review and a note to a book (create a table with the NAME and not the email and if name change dont forget to modifiate in the db of the author the bookid the review and the note on 5)
+
+delete review!!
 
 see the note on the card and modal 
 

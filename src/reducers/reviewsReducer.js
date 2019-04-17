@@ -1,6 +1,7 @@
 const initialReviewsState = {
     isAddPending:false,
     isGetPending:true,
+    isDelPending:false,
     isError:false,
     reviews:[],
     err: '',
@@ -29,6 +30,13 @@ export const reviewsBook = (state=initialReviewsState, action={}) =>{
             return {...state, isGetPending:false,  reviews:action.payload, note:average(action.payload.map(review => review.note)).toFixed(1) }
         case 'GET_REVIEWS_FAILED':
             return {...state, isGetPending:false, isError:true, err:action.payload}
+
+        case 'DEL_REVIEW_PENDING':
+            return {...state, isDelPending:true}
+        case 'DEL_REVIEW_SUCCESS':
+            return{...state, isDelPending:false, reviews: state.reviews.filter(review =>{
+                return review.id !== action.payload
+            })}
         
         default:
         return state

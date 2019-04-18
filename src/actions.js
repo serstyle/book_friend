@@ -5,8 +5,7 @@ import { ON_SEARCH_CHANGE,
 	LOGIN_SUCCESS
 } from './constants'
 
-// const backend = 'https://bookfriends-server.herokuapp.com/'
-const backend = 'http://localhost:3000/'
+// prod process.env.REACT_APP_DOMAIN = 'https://bookfriends-server.herokuapp.com/'
 
 //books
 export const setSearchChange = (text) =>({
@@ -48,7 +47,7 @@ export const addBook = (book) => (dispatch, getState) => {
 	const token = localStorage.getItem('token')
 	const description = book.description.length > 40 ? book.description.substring(0, 40) + '...' : book.description;
 	dispatch({type:'ADD_BOOK_PENDING'})
-	fetch(`${backend}addbook`, {
+	fetch(`${process.env.REACT_APP_DOMAIN}addbook`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -84,7 +83,7 @@ export const addBook = (book) => (dispatch, getState) => {
 
 const getUserBookList = (email, token) => (dispatch, getState) => {
 	dispatch({type:'GET_USER_BOOKLIST_PENDING'})
-	fetch(`${backend}getbook`, {
+	fetch(`${process.env.REACT_APP_DOMAIN}getbook`, {
 		method: 'POST',
 		headers:{
 			'Content-Type': 'application/json',
@@ -102,7 +101,7 @@ const getUserBookList = (email, token) => (dispatch, getState) => {
 //del a book 
 
 export const delBook = (bookid) => (dispatch, getState) => {
-	fetch(`${backend}delbook`, {
+	fetch(`${process.env.REACT_APP_DOMAIN}delbook`, {
 		method:'POST',
 		headers:{
 			'Content-Type': 'application/json',
@@ -125,7 +124,7 @@ export const addBookReading = (book) => (dispatch, getState) => {
 	const token = localStorage.getItem('token')
 	const description = book.description.length > 40 ? book.description.substring(0, 40) + '...' : book.description;
 	dispatch({type:'ADD_BOOK_READING_PENDING'})
-	fetch(`${backend}addbookreading`, {
+	fetch(`${process.env.REACT_APP_DOMAIN}addbookreading`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -161,7 +160,7 @@ export const addBookReading = (book) => (dispatch, getState) => {
 
 const getUserBookListReading = (email, token) => (dispatch, getState) => {
 	dispatch({type:'GET_USER_BOOKLIST_READING_PENDING'})
-	fetch(`${backend}getbookreading`, {
+	fetch(`${process.env.REACT_APP_DOMAIN}getbookreading`, {
 		method: 'POST',
 		headers:{
 			'Content-Type': 'application/json',
@@ -179,7 +178,7 @@ const getUserBookListReading = (email, token) => (dispatch, getState) => {
 //del a book in the booklist reading
 
 export const delBookReading = (bookid) => (dispatch, getState) => {
-	fetch(`${backend}delbookreading`, {
+	fetch(`${process.env.REACT_APP_DOMAIN}delbookreading`, {
 		method:'POST',
 		headers:{
 			'Content-Type': 'application/json',
@@ -202,7 +201,7 @@ export const addBookFinish = (book) => (dispatch, getState) => {
 	const token = localStorage.getItem('token')
 	const description = book.description.length > 40 ? book.description.substring(0, 40) + '...' : book.description;
 	dispatch({type:'ADD_BOOK_FINISH_PENDING'})
-	fetch(`${backend}addbookfinish`, {
+	fetch(`${process.env.REACT_APP_DOMAIN}addbookfinish`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -238,7 +237,7 @@ export const addBookFinish = (book) => (dispatch, getState) => {
 
 const getUserBookListFinish = (email, token) => (dispatch, getState) => {
 	dispatch({type:'GET_USER_BOOKLIST_FINISH_PENDING'})
-	fetch(`${backend}getbookfinish`, {
+	fetch(`${process.env.REACT_APP_DOMAIN}getbookfinish`, {
 		method: 'POST',
 		headers:{
 			'Content-Type': 'application/json',
@@ -256,7 +255,7 @@ const getUserBookListFinish = (email, token) => (dispatch, getState) => {
 //del a book in the booklist finish
 
 export const delBookFinish = (bookid) => (dispatch, getState) => {
-	fetch(`${backend}delbookfinish`, {
+	fetch(`${process.env.REACT_APP_DOMAIN}delbookfinish`, {
 		method:'POST',
 		headers:{
 			'Content-Type': 'application/json',
@@ -280,7 +279,7 @@ export const delBookFinish = (bookid) => (dispatch, getState) => {
 //   LOGIN_FAIL,
 
 export const authSignin = (user) => (dispatch) => {
-	fetch(`${backend}signin`, {
+	fetch(`${process.env.REACT_APP_DOMAIN}signin`, {
 		method: 'POST',
 		headers: {
 		  'Content-Type': 'application/json'
@@ -290,7 +289,7 @@ export const authSignin = (user) => (dispatch) => {
 	.then(res=> res.json())
 	.then(data=> {
 			const token = data.token;
-			fetch(`${backend}profile`, {
+			fetch(`${process.env.REACT_APP_DOMAIN}profile`, {
 				method:'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -319,7 +318,7 @@ export const authSignin = (user) => (dispatch) => {
 export const loadUser = () => (dispatch) =>{
 	const token = localStorage.getItem('token')
 	dispatch({type:'USER_LOADING'});
-	fetch(`${backend}profile`, {
+	fetch(`${process.env.REACT_APP_DOMAIN}profile`, {
 		method:'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -344,7 +343,7 @@ export const loadUser = () => (dispatch) =>{
 
 export const logout = () => (dispatch, getState) =>{
 	const token = localStorage.getItem('token');
-	fetch(`${backend}signout`, {
+	fetch(`${process.env.REACT_APP_DOMAIN}signout`, {
 		method:'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -361,7 +360,7 @@ export const logout = () => (dispatch, getState) =>{
 //   REGISTER_FAIL
 
 export const authRegister = (user) => (dispatch) => (
-	fetch(`${backend}register`, {
+	fetch(`${process.env.REACT_APP_DOMAIN}register`, {
 		method: 'POST',
 		headers: {
 		  'Content-Type': 'application/json'
@@ -371,7 +370,7 @@ export const authRegister = (user) => (dispatch) => (
 	.then(res=> res.json())
 	.then(data=> {
 			const token = data.token;
-			fetch(`${backend}profile`, {
+			fetch(`${process.env.REACT_APP_DOMAIN}profile`, {
 				method:'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -404,7 +403,7 @@ export const updateUser = (user) => (dispatch, getState) => {
 	if(!city.length){
 		city = getState().Authentication.user.city
 	}
-	fetch(`${backend}updateprofile`, {
+	fetch(`${process.env.REACT_APP_DOMAIN}updateprofile`, {
 		method:'PUT',
 		headers: {
 			'Content-Type': 'application/json',
@@ -424,7 +423,7 @@ export const addReview = (data) => (dispatch) => {
 	const token = localStorage.getItem('token');
 	const {bookid, userid, note, review, booktitle} = data
 	dispatch({type:'ADD_REVIEW_PENDING'})
-	fetch(`${backend}addreview`, {
+	fetch(`${process.env.REACT_APP_DOMAIN}addreview`, {
 		method:'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -446,7 +445,7 @@ export const addReview = (data) => (dispatch) => {
 export const getReviews = (bookid) => (dispatch) => {
 	console.log(bookid)
 	dispatch({type:'GET_REVIEWS_PENDING'})
-	fetch(`${backend}getreview`, {
+	fetch(`${process.env.REACT_APP_DOMAIN}getreview`, {
 		method:'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -467,7 +466,7 @@ export const addReviewToggleContainer = dispatch => ({
 export const delReview = (reviewid, email) => (dispatch) => {
 	const token = localStorage.getItem('token');
 	dispatch({type:'DEL_REVIEW_PENDING'})
-	fetch(`${backend}delreview`, {
+	fetch(`${process.env.REACT_APP_DOMAIN}delreview`, {
 		method:'POST',
 		headers: {
 			'Content-Type': 'application/json',

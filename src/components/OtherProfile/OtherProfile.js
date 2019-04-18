@@ -9,7 +9,7 @@ class OtherProfile extends React.Component {
     componentDidMount(){
         console.log(this.props.match.params.id)
         const id = this.props.match.params.id
-        fetch('http://localhost:3000/otherprofile', {
+        fetch(`${process.env.REACT_APP_DOMAIN}otherprofile`, {
             method:'POST',
             headers: {
                 'Content-Type': 'application/json'

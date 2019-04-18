@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {delReview} from '../../../actions'
 
 class BookReview extends React.Component{
@@ -14,7 +15,7 @@ class BookReview extends React.Component{
                 return(
                         <tr id={review.id} key={review.id}>
                             <td>
-                                {review.email}
+                                <Link to={`/profile/${review.userid}`}>{review.name}</Link>
                             </td>
                             <td>
                                 {review.review}
@@ -22,7 +23,7 @@ class BookReview extends React.Component{
                             <td>
                                 {review.note}
                             </td>
-                            {review.email === this.props.user.email?
+                            {review.userid === this.props.user.id?
                                 <td>
                                     <button onClick={()=>this.props.delReview(review.id, this.props.user.email)} className='btn red'>X</button>
                                 </td>
@@ -51,6 +52,7 @@ class BookReview extends React.Component{
                         {reviews}
                     </tbody>
                 </table>
+                {this.props.reviews.length?null:<p style={{color:'lightgrey', fontStyle:'italic'}}>Be the first to add a review...</p>}
             </div>
         )
     }

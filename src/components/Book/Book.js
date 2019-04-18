@@ -57,7 +57,7 @@ class Book extends React.Component{
 									trigger={<Button>ABOUT</Button>}>
 									<p>{this.props.description}</p>
 									<br />
-                        			<Link to={`/book/${this.props.bookid}`}>See more</Link>
+                        			<Link to={`/book/${this.props.bookid}`}>See reviews</Link>
 								</Modal>
 							</div>
 						</div>

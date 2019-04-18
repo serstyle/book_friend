@@ -33,12 +33,12 @@ class Navbar extends React.Component{
 				null
 				:
 				<div>
-					<Link to='/' onClick={this.props.resetBookList} className="brand-logo">Book Friends</Link>
+					<Link to='/' className="brand-logo">Book Friends</Link>
 						{this.props.isAuthenticate? 
 							<ul id="nav-mobile" className="right hide-on-med-and-down">
 							<li><Search /></li>
 								<li>
-									<Link to='/' onClick={this.props.resetBookList}><button className='btn-flat nav-button-item'>Home</button></Link>  
+									<Link to='/'><button className='btn-flat nav-button-item'>Home</button></Link>  
 								</li>
 								<li>
 									<Link to='/profile'><button className='btn-flat nav-button-item'>Profile</button></Link> 

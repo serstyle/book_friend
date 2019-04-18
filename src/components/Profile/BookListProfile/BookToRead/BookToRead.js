@@ -33,7 +33,7 @@ class BookToRead extends React.Component{
                         trigger={<Button>See more</Button>}>
                         {bookDescription}
                         <br />
-                        <Link to={`/book/${bookid}`}>See more</Link>
+                        <Link to={`/book/${bookid}`}>See reviews</Link>
                     </Modal>
                     <Button
                         onClick={()=>this.props.addBookReading(this.props)}

@@ -10,8 +10,8 @@ class AddReview extends React.Component{
     }
     onSubmitAddReview = (e) => {
         e.preventDefault()
-        const {bookid, email} = this.props
-        const data = {...this.state, bookid, email}
+        const {bookid, userid, booktitle} = this.props
+        const data = {...this.state, bookid, userid, booktitle}
         console.log(data)
         this.props.addReview(data)
         this.props.addReviewToggleContainer()
@@ -59,7 +59,7 @@ class AddReview extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        email: state.Authentication.user.email
+        userid: state.Authentication.user.id,
     }
 }
 

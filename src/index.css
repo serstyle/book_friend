@@ -194,6 +194,14 @@ nav .input-field input[type=search]{
   cursor: pointer;
 }
 
+.discret{
+  font-style: italic;
+  color: lightgrey;
+}
+
+.otherProfileDiv{
+  width: 45%
+}
 
 .profile-row{
   margin-top: 35px;

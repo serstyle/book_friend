@@ -6,6 +6,7 @@ const initialReviewsState = {
     reviews:[],
     err: '',
     isSuccess: false,
+    isDelSuccess: false,
     note:0,
     isOpen:false
 }
@@ -17,7 +18,7 @@ export const reviewsBook = (state=initialReviewsState, action={}) =>{
         case 'ADD_REVIEW_PENDING':
             return {...state, isAddPending:true}
         case 'ADD_REVIEW_SUCCESS':
-            return {...state, isPending:false, isSuccess: true, reviews:[...state.reviews, action.payload], note:average([...state.reviews, action.payload].map(review => review.note)).toFixed(1)}
+            return {...state, isPending:false, isDelSuccess:false, isSuccess: true, reviews:[...state.reviews, action.payload], note:average([...state.reviews, action.payload].map(review => review.note)).toFixed(1)}
         case 'ADD_REVIEW_HIDE_NOTIF':
             return{...state, isSuccess:false}
         case 'ADD_REVIEW_TOGGLE_CONTAINER':
@@ -34,10 +35,11 @@ export const reviewsBook = (state=initialReviewsState, action={}) =>{
         case 'DEL_REVIEW_PENDING':
             return {...state, isDelPending:true}
         case 'DEL_REVIEW_SUCCESS':
-            return{...state, isDelPending:false, reviews: state.reviews.filter(review =>{
+            return{...state, isDelPending:false, isDelSuccess:true, isSuccess:false, reviews: state.reviews.filter(review =>{
                 return review.id !== action.payload
             })}
-        
+        case 'DEL_REVIEW_HIDE_NOTIF':
+            return{...state, isDelSuccess:false}
         default:
         return state
     }

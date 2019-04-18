@@ -26,12 +26,12 @@ class Search extends React.Component{
 	
 	render(){
 		return(
-			<div class='nav-wrapper'>
+			<div className='nav-wrapper'>
 			<form onSubmit={this.onSubmit}>
-				<div class="input-field">
+				<div className="input-field">
 					<input placeholder='Search books here' onChange={this.props.onSearchChange}  id="search" type="search" required />
-					<label class="label-icon" for="search"><i class="material-icons">search</i></label>
-					<i class="material-icons">close</i>
+					<label className="label-icon" htmlFor="search"><i className="material-icons">search</i></label>
+					<i className="material-icons">close</i>
 				</div>
 			</form>
 			</div>

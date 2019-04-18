@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router'
-import {  loadUser, updateUser } from '../../actions'
+import { updateUser } from '../../actions'
 
 import { Button, Preloader } from 'react-materialize';
 
@@ -12,10 +12,6 @@ class Settings extends React.Component {
         city:'',
         isError:false,
         isSuccess:false
-    }
-    componentDidMount(){
-        const {loadUser} = this.props
-        loadUser()
     }
 
     onSubmit = (e) => {
@@ -61,20 +57,20 @@ class Settings extends React.Component {
             <div key='key' className=''>
                 <h3 className='center'>Settings</h3>
                 <h5 className='center'>Change your name, age, city</h5>
-                <div class="row">
-                    <form onSubmit={this.onSubmit} class="col s12">
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <input onChange={this.inputChange} value={this.state.name} id="name" type="text" class="validate"/>
-                                <label for="name">Your name is {this.props.user.name}</label>
+                <div className="row">
+                    <form onSubmit={this.onSubmit} className="col s12">
+                        <div className="row">
+                            <div className="input-field col s12">
+                                <input onChange={this.inputChange} value={this.state.name} id="name" type="text" className="validate"/>
+                                <label htmlFor="name">Your name is {this.props.user.name}</label>
                             </div>
-                            <div class="input-field col s12">
-                                <input onChange={this.inputChange} value={this.state.age} id="age" type="text" class="validate"/>
-                                <label for="age">Your age is {this.props.user.age?this.props.user.age:'not defined yet'}</label>
+                            <div className="input-field col s12">
+                                <input onChange={this.inputChange} value={this.state.age} id="age" type="text" className="validate"/>
+                                <label htmlFor="age">Your age is {this.props.user.age?this.props.user.age:'not defined yet'}</label>
                             </div>
-                            <div class="input-field col s12">
-                                <input onChange={this.inputChange} value={this.state.city} id="city" type="text" class="validate"/>
-                                <label for="city">Your city is {this.props.user.city?this.props.user.city:'not defined yet'}</label>
+                            <div className="input-field col s12">
+                                <input onChange={this.inputChange} value={this.state.city} id="city" type="text" className="validate"/>
+                                <label htmlFor="city">Your city is {this.props.user.city?this.props.user.city:'not defined yet'}</label>
                             </div>
                         </div>
                         <Button>Save</Button>
@@ -113,7 +109,6 @@ class Settings extends React.Component {
 
 const mapDispatchToProps = dispatch =>{
     return {
-        loadUser: ()=>dispatch(loadUser()),
         updateUser: (user)=>dispatch(updateUser(user))
     }
 }

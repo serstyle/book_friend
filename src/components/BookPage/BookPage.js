@@ -53,9 +53,9 @@ class BookPage extends React.Component{
                                             
                                             <h5>
                                             {this.props.note >= 0?
-                                                `Note : ${this.props.note}/5`
+                                                `Evaluation : ${this.props.note}/5`
                                                 :
-                                                'There is no reviews for now'
+                                                'There is no evaluation for now'
                                             }
                                             </h5>
                                             <button onClick={() => this.props.addReviewToggleContainer()} className='btn'>Add a Review</button>

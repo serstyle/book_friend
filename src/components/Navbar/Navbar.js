@@ -43,7 +43,7 @@ class Navbar extends React.Component{
 								<li>
 									<Link to='/profile'><button className='btn-flat nav-button-item'>Profile</button></Link> 
 								</li>
-								<li style={{'margin-top': '4px'}}>
+								<li style={{'marginTop': '4px'}}>
 									<Link to='/settings'><Icon>settings</Icon></Link>				
 								</li>
 								<li>

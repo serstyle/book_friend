@@ -26,7 +26,7 @@ class OtherProfile extends React.Component {
                 <h4 className='center-align'>Welcome on the {this.state.name}'s Profile</h4>
                 <div style={{display:'flex', justifyContent:'space-between'}}>
                     <OtherBookList id={id}/>
-                    <OtherLastReviews id={id}/>
+                    <OtherLastReviews title={'Last reviews'} id={id}/>
                 </div>
             </div>
         )

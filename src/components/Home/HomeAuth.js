@@ -33,7 +33,7 @@ class HomeAuth extends React.Component {
                             <h6>You are curently reading {this.props.bookListReading.length} books !</h6>
                             <h6>You have read {this.props.bookListFinish.length} books !</h6>
                             <hr style={{'margin':'30px'}}/>
-                            <OtherLastReviews id={this.props.user.id}/>
+                            <OtherLastReviews title={'Your last reviews'} id={this.props.user.id}/>
                         </div>
                     }
             </div>

@@ -18,7 +18,7 @@ class AddReview extends React.Component{
     }
     render(){
         return(
-            <div class="row container grey lighten-4" style={{position:'relative'}}>
+            <div className="row container grey lighten-4" style={{position:'relative'}}>
                 <Button onClick={()=>this.props.addReviewToggleContainer()} className='red' style={{
                     position: 'absolute',
                     top: '0',
@@ -27,14 +27,14 @@ class AddReview extends React.Component{
                     X
                 </Button>
                 <h3>Add a review</h3>
-                <form onSubmit={this.onSubmitAddReview} class="col s12">
-                <div class="row">
-                    <div class="col s12">
-                    <p>Note:</p>
+                <form onSubmit={this.onSubmitAddReview} className="col s12">
+                <div className="row">
+                    <div className="col s12">
+                    <p>Evaluation:</p>
                     <RadioGroup
                         onChange={e => this.setState({note:e.target.value})}
                         name="note"
-                        label="Note"
+                        label="Evaluation"
                         value="0"
                         options={[{label: '0',value: '0'},
                         {label: '1',value: '1'},
@@ -45,9 +45,9 @@ class AddReview extends React.Component{
                         ]}
                         />
                     </div>
-                    <div class="input-field col s12">
-                        <textarea onChange={e => this.setState({review:e.target.value})} id="textarea1" class="materialize-textarea" required></textarea>
-                        <label for="textarea1">Review</label>
+                    <div className="input-field col s12">
+                        <textarea onChange={e => this.setState({review:e.target.value})} id="textarea1" className="materialize-textarea" required></textarea>
+                        <label htmlFor="textarea1">Review</label>
                     </div>
                     <Button>Add</Button>
                 </div>

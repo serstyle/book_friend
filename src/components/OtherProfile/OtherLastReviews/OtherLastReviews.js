@@ -34,7 +34,7 @@ class OtherLastReviews extends React.Component {
             })
         return(
             <div className='otherProfileDiv lightgrey'>
-                <h5>Last Reviews</h5>
+                <h5>{this.props.title}</h5>
                 {this.state.reviews.length?
                 <table>
                     <thead>

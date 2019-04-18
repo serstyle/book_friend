@@ -44,7 +44,7 @@ class BookReview extends React.Component{
                         <tr>
                             <th>Authors</th>
                             <th>Comments</th>
-                            <th>Note</th>
+                            <th>Evaluations</th>
                             <th></th>
                         </tr>
                     </thead>

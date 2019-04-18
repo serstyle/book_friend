@@ -2,7 +2,6 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router'
 
-import { loadUser } from '../../actions'
 
 import {Row, Preloader} from 'react-materialize'
 
@@ -10,11 +9,7 @@ import BookListToRead from './BookListProfile/BookListToRead'
 import BookListFinish from './BookListProfile/BookListFinish'
 import BookListReading from './BookListProfile/BookListReading'
 
-const mapDispatchToProps = (dispatch) =>{
-        return{
-                loadUser: ()=>dispatch(loadUser())
-        }
-}
+
 const mapStateToProps= (state) =>{
 	return{
         isAuthenticate: state.Authentication.isAuthenticate,
@@ -28,12 +23,6 @@ const mapStateToProps= (state) =>{
 }
 }
 class Profile extends React.Component{
-        componentDidMount(){
-                this.props.loadUser()
-        }
-        handleBook = () => {
-                console.log(this.props.userBookList)
-        }
 	render(){
         return (
         	<div>
@@ -74,4 +63,4 @@ class Profile extends React.Component{
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile)
+export default connect(mapStateToProps)(Profile)

@@ -14,7 +14,7 @@ class OtherBookList extends React.Component {
         const id = this.props.id
         const bookLists = ['toreadbooklist', 'readingbooklist', 'finishbooklist']
         bookLists.map(bookList => {
-        return fetch(`http://localhost:3000/otherprofile/${bookList}`, {
+        return fetch(`${process.env.REACT_APP_DOMAIN}otherprofile/${bookList}`, {
                 method:'POST',
                 headers: {
                     'Content-Type': 'application/json'

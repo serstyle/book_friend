@@ -6,8 +6,9 @@ class OtherLastReviews extends React.Component {
         reviews:[]
     }
     componentDidMount(){
+        console.log(process.env.REACT_APP_DOMAIN)
         const id = this.props.id
-        fetch('http://localhost:3000/otherprofile/reviews', {
+        fetch(`${process.env.REACT_APP_DOMAIN}otherprofile/reviews`, {
             method:'POST',
             headers: {
                 'Content-Type': 'application/json'

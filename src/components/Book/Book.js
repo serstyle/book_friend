@@ -41,7 +41,9 @@ class Book extends React.Component{
 						</div>
 						<div className="card-stacked">
 							<div className="card-content">
-								<h6 style={{'fontWeight': 'bold'}}>{this.props.title.length > 40 ? this.props.title.substring(0, 40) + '...' : this.props.title}</h6>
+								<Link to={`/book/${this.props.bookid}`}>
+									<h6 style={{'fontWeight': 'bold'}}>{this.props.title.length > 40 ? this.props.title.substring(0, 40) + '...' : this.props.title}</h6>
+								</Link>
 								<p>author: {this.props.authors}</p>
 								{this.props.isError && this.props.bookid ?
 									<p className='error-booklist'>error</p>
@@ -57,7 +59,7 @@ class Book extends React.Component{
 									trigger={<Button>ABOUT</Button>}>
 									<p>{this.props.description}</p>
 									<br />
-                        			<Link to={`/book/${this.props.bookid}`}>See reviews</Link>
+                        			<Link to={`/book/${this.props.bookid}`}><Button>See reviews</Button></Link>
 								</Modal>
 							</div>
 						</div>

@@ -1,10 +1,12 @@
 import React from 'react'
+import {Redirect} from 'react-router-dom'
 import OtherLastReviews from './OtherLastReviews/OtherLastReviews'
 import OtherBookList from './OtherBookList/OtherBookList'
 
 class OtherProfile extends React.Component {
     state={
-        name:''
+        name:'',
+        isError:false
     }
     componentDidMount(){
         console.log(this.props.match.params.id)
@@ -18,10 +20,13 @@ class OtherProfile extends React.Component {
         })
         .then(res => res.json())
         .then(data => this.setState({name:data.name}))
+        .catch(err=> this.setState({isError:true}))
     }
     render(){
         const id = this.props.match.params.id
-        return(
+        return this.state.isError?
+            <Redirect to='/' />
+            :
             <div className='container'>
                 <h4 className='center-align'>Welcome on the {this.state.name}'s Profile</h4>
                 <div style={{display:'flex', justifyContent:'space-between'}}>
@@ -29,7 +34,7 @@ class OtherProfile extends React.Component {
                     <OtherLastReviews title={'Last reviews'} id={id}/>
                 </div>
             </div>
-        )
+            
     }
 }
 

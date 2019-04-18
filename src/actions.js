@@ -343,6 +343,7 @@ export const loadUser = () => (dispatch) =>{
 
 export const logout = () => (dispatch, getState) =>{
 	const token = localStorage.getItem('token');
+	dispatch({type:'LOGOUT_PENDING'}) // need to be done 
 	fetch(`${process.env.REACT_APP_DOMAIN}signout`, {
 		method:'POST',
 		headers: {

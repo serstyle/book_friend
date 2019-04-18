@@ -18,9 +18,11 @@ class BookReading extends React.Component{
         return(
             <CollectionItem className="avatar">
                 <img src="https://image.flaticon.com/icons/svg/33/33932.svg" alt="" className="circle" />
-                <span className="title">
-                    {title.length>40? title.substring(0, 40) + '...' : title}
-                </span>
+                <Link to={`/book/${bookid}`}>
+                    <span className="title">
+                        {title.length>40? title.substring(0, 40) + '...' : title}
+                    </span>
+                </Link>
                 <p className='authors'>{authors}</p>
                 <p>{description}</p>
                 <div className='bottom-book'>
@@ -33,7 +35,7 @@ class BookReading extends React.Component{
                         trigger={<Button>See more</Button>}>
                         {bookDescription}
                         <br />
-                        <Link to={`/book/${bookid}`}>See reviews</Link>
+                        <Link to={`/book/${bookid}`}><Button>See reviews</Button></Link>
                     </Modal>
                     <Button
                         onClick={()=>this.props.addBookFinish(this.props)}

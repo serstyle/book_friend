@@ -198,7 +198,9 @@ nav .input-field input[type=search]{
   font-style: italic;
   color: lightgrey;
 }
-
+.sidenav{
+  background-color: #444;
+}
 .otherProfileDiv{
   width: 45%
 }

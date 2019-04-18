@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom';
-import { Icon } from 'react-materialize';
+import { Icon, Navbar, NavItem } from 'react-materialize';
 
 import SigninModal from '../Signin/SigninModal'
 import RegisterModal from '../Register/RegisterModal'
@@ -9,7 +9,7 @@ import Search from '../Search/Search'
 
 import {resetBookList, logout, close_modal} from '../../actions'
 
-class Navbar extends React.Component{
+class TopNavbar extends React.Component{
 	// state = {
 	// 	isOpen: false,
 	// 	isRegOpen:false
@@ -28,43 +28,39 @@ class Navbar extends React.Component{
 	}
 	render(){
 		return (
-			<nav className="nav-wrapper black">
+			<div>
 				{this.props.isLoading?
-				null
+					<Navbar className="black"></Navbar>
 				:
-				<div>
-					<Link to='/' className="brand-logo">Book Friends</Link>
-						{this.props.isAuthenticate? 
-							<ul id="nav-mobile" className="right hide-on-med-and-down">
-							<li><Search /></li>
-								<li>
+					this.props.isAuthenticate? 
+						<Navbar className="black"  alignLinks="right" brand={<Link to='/' className="brand-logo">Book Friends</Link>}>	
+							<NavItem><Search /></NavItem>
+								<NavItem>
 									<Link to='/'><button className='btn-flat nav-button-item'>Home</button></Link>  
-								</li>
-								<li>
+								</NavItem>
+								<NavItem>
 									<Link to='/profile'><button className='btn-flat nav-button-item'>Profile</button></Link> 
-								</li>
-								<li style={{'marginTop': '4px'}}>
-									<Link to='/settings'><Icon>settings</Icon></Link>				
-								</li>
-								<li>
+								</NavItem>
+								<NavItem>
+									<Link to='/settings'><button className='btn-flat nav-button-item'><Icon>settings</Icon></button></Link>				
+								</NavItem>
+								<NavItem>
 									<Link to='/' onClick={this.signout}>
 										<button className='btn-flat nav-button-item'>Signout</button>
 									</Link>
-								</li>
-							</ul>
-						:
-						<ul id="nav-mobile" className="right hide-on-med-and-down">
-							<li>
+								</NavItem>
+						</Navbar>
+					:
+						<Navbar className="black"  alignLinks="right" brand={<Link to='/' className="brand-logo">Book Friends</Link>}>
+							<NavItem>
 								<SigninModal buttonSigninStyle={'btn-flat nav-button-item'} emailId={'nav_signin_email_id'} passwordId={'nav_signin_password_id'}/>
-							</li>
-							<li>
+							</NavItem>
+							<NavItem>
 								<RegisterModal buttonRegisterStyle={'btn-flat nav-button-item'} emailId={'nav_register_email_id'} passwordId={'nav_register_password_id'} nameId={'nav_register_name_id'}/>
-							</li>
-						</ul>
-					}
-				</div>
+							</NavItem>
+						</Navbar>
 				}
-			</nav>
+			</div>
 		)
 	}
 }
@@ -84,7 +80,7 @@ const mapDispatchToProps = (dispatch) =>{
 }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Navbar))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(TopNavbar))
 
 
 

@@ -25,7 +25,7 @@ class BookReview extends React.Component{
                             </td>
                             {review.userid === this.props.user.id?
                                 <td>
-                                    <button onClick={()=>this.props.delReview(review.id, this.props.user.email)} className='btn red'>X</button>
+                                    <button onClick={()=>this.props.delReview(review.id, this.props.user.email)} className='btn btn-small red'>X</button>
                                 </td>
                             
                             :

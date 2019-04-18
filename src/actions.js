@@ -422,7 +422,7 @@ export const close_modal = () => ({
 
 export const addReview = (data) => (dispatch) => {
 	const token = localStorage.getItem('token');
-	const {bookid, email, note, review} = data
+	const {bookid, userid, note, review, booktitle} = data
 	dispatch({type:'ADD_REVIEW_PENDING'})
 	fetch(`${backend}addreview`, {
 		method:'POST',
@@ -430,10 +430,11 @@ export const addReview = (data) => (dispatch) => {
 			'Content-Type': 'application/json',
 			'Authorization' : token
 		},
-		body: JSON.stringify({bookid, email, note, review})
+		body: JSON.stringify({bookid, userid, note, review, booktitle})
 	})
 	.then(res=> res.json())
 	.then(data =>{
+		dispatch(getReviews(bookid))
 		dispatch({type:'ADD_REVIEW_SUCCESS', payload:data})
 		setTimeout(()=>{
 			dispatch({type:'ADD_REVIEW_HIDE_NOTIF'})
@@ -477,5 +478,8 @@ export const delReview = (reviewid, email) => (dispatch) => {
 	.then(res => res.json())
 	.then(data => {
 		dispatch({type:'DEL_REVIEW_SUCCESS', payload:data})
+		setTimeout(()=>{
+			dispatch({type:'DEL_REVIEW_HIDE_NOTIF'})
+		}, 3000)
 	})
 }

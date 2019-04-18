@@ -7,6 +7,7 @@ import Profile from './components/Profile/Profile'
 import SearchPage from './components/Search/SearchPage'
 import Settings from './components/Settings/Settings'
 import BookPage from './components/BookPage/BookPage'
+import OtherProfile from './components/OtherProfile/OtherProfile'
 
 import { loadUser } from './actions'
 
@@ -36,10 +37,11 @@ class App extends Component {
             <Navbar />
               <Switch className='container'>
                 <Route exact path='/' render={(props) => <Home {...props} bookList={this.props.bookList}  />} />
-                <Route path='/profile' render={(props) => <Profile {...props} />} />
+                <Route exact path='/profile' render={(props) => <Profile {...props} />} />
                 <Route path='/search' render={(props) => <SearchPage {...props} />} />
                 <Route path='/settings' render={(props) => <Settings {...props} />} />
                 <Route path='/book/:book' render={(props) => <BookPage {...props} />} />
+                <Route path='/profile/:id' render={(props) => <OtherProfile {...props} />} />
               </Switch>
           </div>
         </BrowserRouter> 

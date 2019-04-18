@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 
 import {Preloader} from 'react-materialize';
+import OtherLastReviews from '../OtherProfile/OtherLastReviews/OtherLastReviews'
 
 const mapStateToProps = state =>{
     return{
@@ -16,6 +17,7 @@ const mapStateToProps = state =>{
     }
   }
 class HomeAuth extends React.Component {
+
     render(){
         return(
             <div className='container'>
@@ -26,10 +28,12 @@ class HomeAuth extends React.Component {
                             <h1 className='center-align'>Hello {this.props.user.name} !</h1>
                             <hr style={{'margin':'30px'}}/>
                             
-                            <p style={{fontStyle:'italic', color: 'lightgrey'}}>{this.props.bookList.length === 0 && this.props.bookListReading.length === 0 && this.props.bookListFinish.length === 0?'Add some book to your list by using the search barre!': null}</p>
+                            <p className='discret'>{this.props.bookList.length === 0 && this.props.bookListReading.length === 0 && this.props.bookListFinish.length === 0?'Add some book to your list by using the search barre!': null}</p>
                             <h6>You have {this.props.bookList.length} books to read !</h6>
                             <h6>You are curently reading {this.props.bookListReading.length} books !</h6>
                             <h6>You have read {this.props.bookListFinish.length} books !</h6>
+                            <hr style={{'margin':'30px'}}/>
+                            <OtherLastReviews id={this.props.user.id}/>
                         </div>
                     }
             </div>

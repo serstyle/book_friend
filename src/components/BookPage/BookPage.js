@@ -62,7 +62,7 @@ class BookPage extends React.Component{
                                         </div>
                                     </div>
                                     {this.props.isOpen?
-                                    <AddReview id='addreview' bookid={book.id}/>
+                                    <AddReview id='addreview' booktitle={book.volumeInfo.title} bookid={book.id}/>
                                     :
                                     null}
                                     <BookReview  />
@@ -87,6 +87,10 @@ class BookPage extends React.Component{
                     :
                     null
                 }
+                {this.props.isDelSuccess?
+                <p className='alert alert-danger'>Deleted your comment with success !</p>
+                :
+                null}
             </div>
         )
     }
@@ -109,6 +113,7 @@ const mapStateToProps = state => {
         isAuthenticate: state.Authentication.isAuthenticate,
         isLoading: state.Authentication.isLoading,
         isAddSuccess: state.reviewsBook.isSuccess,
+        isDelSuccess: state.reviewsBook.isDelSuccess,
         isOpen: state.reviewsBook.isOpen,
         note: state.reviewsBook.note,
         isError: state.userBookList.isError,

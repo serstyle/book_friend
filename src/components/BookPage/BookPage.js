@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import {onSubmitBookById, loadUser, getReviews, addReviewToggleContainer} from '../../actions'
-import {Preloader} from 'react-materialize'
+import {Preloader, Row, Col} from 'react-materialize'
 import Book from '../Book/Book'
 import BookReview from './BookReview/BookReview'
 import AddReview from './AddReview/AddReview'
@@ -36,7 +36,8 @@ class BookPage extends React.Component{
                                 <p>There is no book with this ID, please enter a correct ID</p>
                                 : 
                                 <div>
-                                    <div style={{display:'flex'}}>
+                                    <Row>
+                                        <Col s={0} m={12} l={6}>
                                         <Book
                                         key={book.id} 
                                         bookid={book.id}
@@ -45,28 +46,25 @@ class BookPage extends React.Component{
                                         image={book.volumeInfo.imageLinks?book.volumeInfo.imageLinks.smallThumbnail:'/media/book_cover.jpg'}
                                         description={book.volumeInfo.description?book.volumeInfo.description:'No description'}
                                         />
-                                        <div style={{
-                                                display: 'flex',
-                                                flexDirection: 'column',
-                                                justifyContent: 'space-around'
-                                                }}>
-                                            
-                                            <h5>
-                                            {this.props.note >= 0?
-                                                `Evaluation : ${this.props.note}/5`
-                                                :
-                                                'There is no evaluation for now'
-                                            }
-                                            </h5>
-                                            <button onClick={() => this.props.addReviewToggleContainer()} className='btn'>Add a Review</button>
-                                        </div>
-                                    </div>
+                                        </Col>
+                                            <Col s={12} m={6} l={6}> 
+                                                <h5>
+                                                {this.props.note >= 0?
+                                                    `Evaluation : ${this.props.note}/5`
+                                                    :
+                                                    'There is no evaluation for now'
+                                                }
+                                                </h5>
+                                            </Col>
+                                            <Col s={12} m={6} l={6}>
+                                                <button onClick={() => this.props.addReviewToggleContainer()} className='btn'>Add a Review</button>
+                                            </Col> 
+                                    </Row>
                                     {this.props.isOpen?
                                     <AddReview id='addreview' booktitle={book.volumeInfo.title} bookid={book.id}/>
                                     :
                                     null}
                                     <BookReview  />
-
                                 </div>
                 }
                 {this.props.isAddSuccess?

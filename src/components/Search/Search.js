@@ -18,7 +18,8 @@ const mapStateToProps= (state) =>{
 class Search extends React.Component{
 	
 	onSubmit = (e) =>{
-    e.preventDefault()
+		e.preventDefault()
+		
 		this.props.onSubmitBook()
 		this.props.history.push('/search')
   	}

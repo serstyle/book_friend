@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
-import Navbar from './components/Navbar/Navbar'
+import TopNavbar from './components/Navbar/Navbar'
 import Home from './components/Home/Home'
 import Profile from './components/Profile/Profile'
 import SearchPage from './components/Search/SearchPage'
@@ -34,7 +34,7 @@ class App extends Component {
     return (
         <BrowserRouter>
           <div>
-            <Navbar />
+            <TopNavbar />
               <Switch className='container'>
                 <Route exact path='/' render={(props) => <Home {...props} bookList={this.props.bookList}  />} />
                 <Route exact path='/profile' render={(props) => <Profile {...props} />} />

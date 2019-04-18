@@ -28,10 +28,10 @@ class HomeAuth extends React.Component {
                             <h1 className='center-align'>Hello {this.props.user.name} !</h1>
                             <hr style={{'margin':'30px'}}/>
                             
-                            <p className='discret'>{this.props.bookList.length === 0 && this.props.bookListReading.length === 0 && this.props.bookListFinish.length === 0?'Add some book to your list by using the search barre!': null}</p>
-                            <h6>You have {this.props.bookList.length} books to read !</h6>
-                            <h6>You are curently reading {this.props.bookListReading.length} books !</h6>
-                            <h6>You have read {this.props.bookListFinish.length} books !</h6>
+                            <p className='discret'>{this.props.bookList.length === 0 && this.props.bookListReading.length === 0 && this.props.bookListFinish.length === 0?'Add some book to your list by using the search bar!': null}</p>
+                            <h6>You have {this.props.bookList.length} {this.props.bookList.length === 1? 'book': 'books'} to read !</h6>
+                            <h6>You are curently reading {this.props.bookListReading.length} {this.props.bookListReading.length === 1? 'book': 'books'} !</h6>
+                            <h6>You have read {this.props.bookListFinish.length} {this.props.bookListFinish.length === 1? 'book': 'books'} !</h6>
                             <hr style={{'margin':'30px'}}/>
                             <OtherLastReviews title={'Your last reviews'} id={this.props.user.id}/>
                         </div>

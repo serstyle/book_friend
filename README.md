@@ -23,20 +23,13 @@ make the search bar in the nav bar so accessible from everywhere on the website 
 have nice home auth page (with last activities) // done but can be improve 
 
 
-being able to let a review and a note to a book (create a table with the NAME and not the email and if name change dont forget to modifiate in the db of the author the bookid the review and the note on 5)
+being able to let a review and a note to a book (create a table with the NAME and not the email and if name change dont forget to modifiate in the db of the author the bookid the review and the note on 5) //done
 
-delete review!!
+delete review // done 
 
-see the note on the card and modal 
-
-
-
-create a page with the reviews for the book (the user will see 'see review' in the modal and will be able to go on that page by clicking)
-
-
-
-Possibility to add friends and see their profile (book they wanna read ...)
+Possibility to FOLLOW people and see their profile (book they wanna read ...)
 
 chat between friends ?
 
 
+When seach on mobile should close the sidenav 

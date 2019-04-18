@@ -13,10 +13,11 @@ class Book extends React.Component{
 
 	render(){
 		const isBookReadingList = this.props.userBookListReading.filter(e => e.bookid === this.props.bookid).length > 0
+		const isBookFinishList = this.props.userBookListFinish.filter(e => e.bookid === this.props.bookid).length > 0
 		const addBook = 
 		<div>
 			{	
-				this.props.userBookList.filter(e => e.bookid === this.props.bookid).length > 0 || isBookReadingList?
+				this.props.userBookList.filter(e => e.bookid === this.props.bookid).length > 0 || isBookReadingList || isBookFinishList?
 				<Button
 						floating
 						className="green"
@@ -80,6 +81,7 @@ const mapStateToProps = state => {
 	return{
 		userBookList: state.userBookList.bookList,
 		userBookListReading: state.userBookList.bookListReading,
+		userBookListFinish: state.userBookList.bookListFinish,
 		isPending: state.userBookList.isPending
 	}
 }

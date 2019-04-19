@@ -14,6 +14,7 @@ const initialStateAuthentication = {
 export const Authentication = (state=initialStateAuthentication, action={}) =>{
 	console.log(action)
 	switch(action.type){
+		case 'LOGOUT_PENDING':
 		case 'USER_LOADING':
 			return {...state, isLoading:true, isError: false}
 		case 'USER_LOADED':
@@ -23,12 +24,10 @@ export const Authentication = (state=initialStateAuthentication, action={}) =>{
 		case LOGIN_SUCCESS:
 			localStorage.setItem('token', action.payload.token)
 			return{...state, isAuthenticate:true, user:action.payload.data, isLoading:false, isError: false}
-		
-		
-		case 'AUTHENTICATION_SUCCESS':
-			return {...state, isAuthenticate:true, user:action.payload, isError: false}
-
-		
+	
+		// case 'AUTHENTICATION_SUCCESS':
+		// 	return {...state, isAuthenticate:true, user:action.payload, isError: false}
+	
 		case 'LOGIN_FAIL':
 		case 'REGISTER_FAIL':
 			localStorage.removeItem('token');

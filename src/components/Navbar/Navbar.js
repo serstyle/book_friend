@@ -24,17 +24,42 @@ class TopNavbar extends React.Component{
 					this.props.isAuthenticate? 
 						<Navbar isOpen={false} className="black"  alignLinks="right"  brand={<Link to='/' className="brand-logo">Book Friends</Link>}>	
 							<Search />
-							<Link to='/' className='sidenav-close'><button className='btn-flat nav-button-item sidenav-close'>Home</button></Link>  																
-							<Link to='/profile' className='sidenav-close'><button className='btn-flat nav-button-item sidenav-close'>Profile</button></Link> 
-							<Link to='/settings' className='sidenav-close'><button className='btn-flat nav-button-item sidenav-close'><Icon>settings</Icon></button></Link>
+							<Link to='/' className='sidenav-close'>
+								<button className='btn-flat nav-button-item sidenav-close'>
+									Home
+								</button>
+							</Link>  																
+							<Link to='/profile' className='sidenav-close'>
+								<button className='btn-flat nav-button-item sidenav-close'>
+									Profile
+								</button>
+							</Link> 
+							<Link to='/settings' className='sidenav-close'>
+								<button className='btn-flat nav-button-item sidenav-close'>
+									<Icon>
+										settings
+									</Icon>
+								</button>
+							</Link>
 							<Link to='/' className='sidenav-close' onClick={this.signout}>
-								<button className='btn-flat nav-button-item sidenav-close'>Signout</button>
+								<button className='btn-flat nav-button-item sidenav-close'>
+									Signout
+								</button>
 							</Link>
 						</Navbar>
 					:
 						<Navbar className="black"  alignLinks="right" brand={<Link to='/' className="brand-logo">Book Friends</Link>}>
-							<SigninModal className='sidenav-close' buttonSigninStyle={'btn-flat nav-button-item sidenav-close'} emailId={'nav_signin_email_id'} passwordId={'nav_signin_password_id'}/>							
-							<RegisterModal  className='sidenav-close' buttonRegisterStyle={'btn-flat nav-button-item sidenav-close'} emailId={'nav_register_email_id'} passwordId={'nav_register_password_id'} nameId={'nav_register_name_id'}/>							
+							<SigninModal 
+								className='sidenav-close' 
+								buttonSigninStyle={'btn-flat nav-button-item sidenav-close'} 
+								emailId={'nav_signin_email_id'} passwordId={'nav_signin_password_id'}
+
+							/>							
+							<RegisterModal  
+								className='sidenav-close' 
+								buttonRegisterStyle={'btn-flat nav-button-item sidenav-close'} 
+								mailId={'nav_register_email_id'} passwordId={'nav_register_password_id'} nameId={'nav_register_name_id'}
+							/>							
 						</Navbar>
 				}
 			</div>

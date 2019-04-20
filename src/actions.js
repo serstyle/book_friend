@@ -304,6 +304,8 @@ export const authSignin = (user) => (dispatch) => {
 				dispatch(getUserBookList(data.email, token))
 				dispatch(getUserBookListReading(data.email, token))
 				dispatch(getUserBookListFinish(data.email, token))
+				dispatch(getFollows(data.id))
+				dispatch(getFollowers(data.id))
 				dispatch({type:LOGIN_SUCCESS, payload: {data, token} })
 				console.log(data)
 			})
@@ -333,6 +335,8 @@ export const loadUser = () => (dispatch) =>{
 		dispatch(getUserBookList(data.email))
 		dispatch(getUserBookListReading(data.email))
 		dispatch(getUserBookListFinish(data.email))
+		dispatch(getFollows(data.id))
+		dispatch(getFollowers(data.id))
 		dispatch({type:'USER_LOADED', payload: data })
 		console.log(data)
 	})
@@ -352,7 +356,9 @@ export const logout = () => (dispatch, getState) =>{
 		}
 	})
 	.then(res => res.json())
-	.then(data => dispatch({type:'LOGOUT_SUCCESS'}))
+	.then(data => {
+		dispatch({type:'ON_SIGNOUT_RESET_FOLLOW'})
+		dispatch({type:'LOGOUT_SUCCESS'})})
 	.catch(err=>console.log(err))
 }
 
@@ -482,4 +488,84 @@ export const delReview = (reviewid, email) => (dispatch) => {
 			dispatch({type:'DEL_REVIEW_HIDE_NOTIF'})
 		}, 3000)
 	})
+}
+
+//FOLLOW / FOLLOWER
+
+export const addFollow = (user_id, follow_by_id) => dispatch =>{
+	fetch(`${process.env.REACT_APP_DOMAIN}follow/addfollow`, {
+		method:'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization' : ''
+		},
+		body: JSON.stringify({user_id, follow_by_id})
+	})
+	.then(res=>res.json())
+	.then(data => {
+		dispatch({type:'ADD_FOLLOW_SUCCESS', payload:data})
+	})
+}
+
+export const getFollows = (follow_by_id) => dispatch =>{
+	fetch(`${process.env.REACT_APP_DOMAIN}follow/getfollows`, {
+		method:'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization' : ''
+		},
+		body: JSON.stringify({follow_by_id})
+	})
+	.then(res=>res.json())
+	.then(data => {
+		dispatch({type:'GET_FOLLOWS_SUCCESS', payload:data})
+	})
+}
+
+export const getFollowers = (user_id) => dispatch =>{
+	fetch(`${process.env.REACT_APP_DOMAIN}follow/getfollowers`, {
+		method:'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization' : ''
+		},
+		body: JSON.stringify({user_id})
+	})
+	.then(res=>res.json())
+	.then(data => {
+		dispatch({type:'GET_FOLLOWERS_SUCCESS', payload:data})
+	})
+}
+
+export const unFollow = (user_id, follow_by_id) => dispatch =>{
+	fetch(`${process.env.REACT_APP_DOMAIN}follow/unfollow`, {
+		method:'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization' : ''
+		},
+		body: JSON.stringify({user_id, follow_by_id})
+	})
+	.then(res=>res.json())
+	.then(data => {
+		dispatch({type:'UNFOLLOW_SUCCESS', payload:data})
+	})
+}
+
+export const getProfile = (id) => dispatch =>{
+	fetch(`${process.env.REACT_APP_DOMAIN}otherprofile`, {
+			method:'POST',
+			headers: {
+					'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({id})
+	})
+	.then(res => res.json())
+	.then(data =>{
+			data === 'err'?
+			dispatch({type:'GET_PROFILE_ERROR'})
+			:
+			dispatch({type:'GET_PROFILE_SUCCSES', payload:data})
+	})
+	.catch(err=> dispatch({type:'GET_PROFILE_ERROR'}))
 }

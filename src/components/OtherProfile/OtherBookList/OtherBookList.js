@@ -8,7 +8,8 @@ class OtherBookList extends React.Component {
     state={
         toreadbooklist:[],
         readingbooklist:[],
-        finishbooklist:[]
+        finishbooklist:[],
+        isPending:true
     }
     componentDidMount(){
         const id = this.props.id
@@ -22,12 +23,33 @@ class OtherBookList extends React.Component {
                 body: JSON.stringify({id})
             })
             .then(res => res.json())
-            .then(data => this.setState({[bookList]:data}))
+            .then(data => this.setState({[bookList]:data, isPending:false}))
         })
     }
+    componentDidUpdate(prevProps){
+        const id = this.props.id
+        if(prevProps.id !== id){
+            console.log('trigger')
+            this.setState({isPending:true})
+            const bookLists = ['toreadbooklist', 'readingbooklist', 'finishbooklist']
+            bookLists.map(bookList => {
+            return fetch(`${process.env.REACT_APP_DOMAIN}otherprofile/${bookList}`, {
+                    method:'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({id})
+                })
+                .then(res => res.json())
+                .then(data => this.setState({[bookList]:data, isPending:false}))
+            })
+        }
+    }
     render(){
-        return(
-            <div className='otherProfileDiv'>
+        return this.state.isPending?
+            <p>...</p>
+        :
+            <div>
                 <h5>BookList :</h5>
                 <OtherToReadList toReadList={this.state.toreadbooklist}/>
 
@@ -35,7 +57,7 @@ class OtherBookList extends React.Component {
 
                 <OtherFinishList finishList={this.state.finishbooklist}/>
             </div>
-        )
+        
     }
 }
 

@@ -8,6 +8,8 @@ import SearchPage from './components/Search/SearchPage'
 import Settings from './components/Settings/Settings'
 import BookPage from './components/BookPage/BookPage'
 import OtherProfile from './components/OtherProfile/OtherProfile'
+import Follows from './components/Follows/Follows'
+import Followers from './components/Followers/Followers'
 
 import { loadUser } from './actions'
 
@@ -41,7 +43,9 @@ class App extends Component {
                 <Route path='/search' render={(props) => <SearchPage {...props} />} />
                 <Route path='/settings' render={(props) => <Settings {...props} />} />
                 <Route path='/book/:book' render={(props) => <BookPage {...props} />} />
-                <Route path='/profile/:id' render={(props) => <OtherProfile {...props} />} />
+                <Route exact path='/profile/:id' render={(props) => <OtherProfile {...props} />} />
+                <Route path='/profile/:id/follows' render={(props) => <Follows {...props} />} />
+                <Route path='/profile/:id/followers' render={(props) => <Followers {...props} />} />
               </Switch>
           </div>
         </BrowserRouter> 

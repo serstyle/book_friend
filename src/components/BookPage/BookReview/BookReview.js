@@ -24,7 +24,7 @@ class BookReview extends React.Component{
                                 {review.note}
                             </td>
                             {review.userid === this.props.user.id?
-                                <td>
+                                <td style={{borderBottom: '1px solid rgb(255, 255, 255)'}}>
                                     <button onClick={()=>this.props.delReview(review.id, this.props.user.email)} className='btn btn-small red'>X</button>
                                 </td>
                             
@@ -45,7 +45,6 @@ class BookReview extends React.Component{
                             <th>Authors</th>
                             <th>Comments</th>
                             <th>Evaluations</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>

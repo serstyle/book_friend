@@ -29,7 +29,7 @@ class TopNavbar extends React.Component{
 									Home
 								</button>
 							</Link>  																
-							<Link to='/profile' className='sidenav-close'>
+							<Link to={`/profile/${this.props.user.id}`} className='sidenav-close'>
 								<button className='btn-flat nav-button-item sidenav-close'>
 									Profile
 								</button>
@@ -70,7 +70,8 @@ class TopNavbar extends React.Component{
 const mapStateToProps= (state) =>{
 	return{
 		isAuthenticate: state.Authentication.isAuthenticate,
-		isLoading: state.Authentication.isLoading
+		isLoading: state.Authentication.isLoading,
+		user:state.Authentication.user
 }
 }
 

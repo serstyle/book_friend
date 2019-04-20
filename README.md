@@ -33,3 +33,8 @@ chat between friends ?
 
 
 When seach on mobile should close the sidenav 
+
+fix when you are on a stranger profile page and go back to the user one it doest refresh with the last review and book list because of the componentdidmount maybe
+try componentdidupdate //suppose to work now try to find some bugs
+
+add a page for follows and followers

@@ -304,9 +304,9 @@ export const authSignin = (user) => (dispatch) => {
 				dispatch(getUserBookList(data.email, token))
 				dispatch(getUserBookListReading(data.email, token))
 				dispatch(getUserBookListFinish(data.email, token))
-				dispatch(getFollows(data.id))
-				dispatch(getFollowers(data.id))
-				dispatch(getAllReviews(data.id))
+				dispatch(getFollows(data.id, token))
+				dispatch(getFollowers(data.id, token))
+				dispatch(getAllReviews(data.id, token))
 				dispatch({type:LOGIN_SUCCESS, payload: {data, token} })
 				console.log(data)
 			})
@@ -509,12 +509,12 @@ export const addFollow = (user_id, follow_by_id) => dispatch =>{
 	})
 }
 
-export const getFollows = (follow_by_id) => dispatch =>{
+export const getFollows = (follow_by_id, token) => dispatch =>{
 	fetch(`${process.env.REACT_APP_DOMAIN}follow/getfollows`, {
 		method:'POST',
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization' : localStorage.getItem('token')
+			'Authorization' : token || localStorage.getItem('token')
 		},
 		body: JSON.stringify({follow_by_id})
 	})
@@ -524,12 +524,12 @@ export const getFollows = (follow_by_id) => dispatch =>{
 	})
 }
 
-export const getFollowers = (user_id) => dispatch =>{
+export const getFollowers = (user_id, token) => dispatch =>{
 	fetch(`${process.env.REACT_APP_DOMAIN}follow/getfollowers`, {
 		method:'POST',
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization' : localStorage.getItem('token')
+			'Authorization' : token || localStorage.getItem('token')
 		},
 		body: JSON.stringify({user_id})
 	})
@@ -554,13 +554,13 @@ export const unFollow = (user_id, follow_by_id) => dispatch =>{
 	})
 }
 
-export const getAllReviews = (id) => dispatch => {
+export const getAllReviews = (id, token) => dispatch => {
 	dispatch({type:'GET_ALL_REVIEWS_PENDING'})
 	fetch(`${process.env.REACT_APP_DOMAIN}getallreviews`, {
 		method:'POST',
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization' : localStorage.getItem('token')
+			'Authorization' : token || localStorage.getItem('token')
 		},
 		body: JSON.stringify({id})
 	})		

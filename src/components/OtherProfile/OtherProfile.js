@@ -16,12 +16,14 @@ class OtherProfile extends React.Component {
     }
     addFollow = () => {
         this.props.addFollow(this.props.match.params.id, this.props.user.id)
+        console.log(this.props.follow)
         this.setState(prevState => ({
             followers: prevState.followers+1
         }))
     }
     unFollow = () => {
         this.props.unFollow(this.props.match.params.id, this.props.user.id)
+        console.log(this.props.follow)
         this.setState(prevState => ({
             followers: prevState.followers-1
         }))
@@ -153,7 +155,7 @@ class OtherProfile extends React.Component {
                                 <OtherBookList id={id}/>
                             </Col>
                             <Col s={12} m={12} l={6} className='otherProfileDiv'>
-                                <OtherLastReviews title={'Last reviews'} id={id}/>
+                                <OtherLastReviews title={this.state.name + "'s last reviews"} id={id}/>
                             </Col>
                         </Row>
                     </div>

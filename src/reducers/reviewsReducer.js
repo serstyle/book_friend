@@ -44,3 +44,19 @@ export const reviewsBook = (state=initialReviewsState, action={}) =>{
         return state
     }
 }
+
+const initStateAllReviews = {
+    reviews:[],
+    isPending:true
+}
+
+export const getAllReviews = (state=initStateAllReviews, action={})=>{
+    switch(action.type){
+        case 'GET_ALL_REVIEWS_PENDING':
+            return{...state, isPending:true}
+        case 'GET_ALL_REVIEWS_SUCCESS':
+            return{...state, reviews:action.payload, isPending:false}
+        default:
+        return state    
+    }
+}

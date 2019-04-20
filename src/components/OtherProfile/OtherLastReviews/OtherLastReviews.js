@@ -14,7 +14,8 @@ class OtherLastReviews extends React.Component {
         fetch(`${process.env.REACT_APP_DOMAIN}otherprofile/reviews`, {
             method:'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization' : localStorage.getItem('token')
             },
             body: JSON.stringify({id})
         })
@@ -29,7 +30,8 @@ class OtherLastReviews extends React.Component {
             fetch(`${process.env.REACT_APP_DOMAIN}otherprofile/reviews`, {
                 method:'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization' : localStorage.getItem('token')
                 },
                 body: JSON.stringify({id})
             })

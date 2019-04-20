@@ -18,7 +18,8 @@ class OtherBookList extends React.Component {
         return fetch(`${process.env.REACT_APP_DOMAIN}otherprofile/${bookList}`, {
                 method:'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization' : localStorage.getItem('token')
                 },
                 body: JSON.stringify({id})
             })
@@ -36,7 +37,8 @@ class OtherBookList extends React.Component {
             return fetch(`${process.env.REACT_APP_DOMAIN}otherprofile/${bookList}`, {
                     method:'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization' : localStorage.getItem('token')
                     },
                     body: JSON.stringify({id})
                 })

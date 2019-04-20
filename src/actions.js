@@ -499,7 +499,7 @@ export const addFollow = (user_id, follow_by_id) => dispatch =>{
 		method:'POST',
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization' : ''
+			'Authorization' : localStorage.getItem('token')
 		},
 		body: JSON.stringify({user_id, follow_by_id})
 	})
@@ -514,7 +514,7 @@ export const getFollows = (follow_by_id) => dispatch =>{
 		method:'POST',
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization' : ''
+			'Authorization' : localStorage.getItem('token')
 		},
 		body: JSON.stringify({follow_by_id})
 	})
@@ -529,7 +529,7 @@ export const getFollowers = (user_id) => dispatch =>{
 		method:'POST',
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization' : ''
+			'Authorization' : localStorage.getItem('token')
 		},
 		body: JSON.stringify({user_id})
 	})
@@ -544,7 +544,7 @@ export const unFollow = (user_id, follow_by_id) => dispatch =>{
 		method:'POST',
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization' : ''
+			'Authorization' : localStorage.getItem('token')
 		},
 		body: JSON.stringify({user_id, follow_by_id})
 	})
@@ -560,7 +560,7 @@ export const getAllReviews = (id) => dispatch => {
 		method:'POST',
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization' : ''
+			'Authorization' : localStorage.getItem('token')
 		},
 		body: JSON.stringify({id})
 	})		

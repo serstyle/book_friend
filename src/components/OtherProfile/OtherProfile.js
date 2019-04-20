@@ -38,7 +38,8 @@ class OtherProfile extends React.Component {
         fetch(`${process.env.REACT_APP_DOMAIN}otherprofile`, {
             method:'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization' : localStorage.getItem('token')
             },
             body: JSON.stringify({id})
         })

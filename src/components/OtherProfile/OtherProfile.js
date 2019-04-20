@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Redirect, Link} from 'react-router-dom'
-import {Icon, Button, Row, Col} from 'react-materialize'
+import {Icon, Button, Row, Col, Preloader} from 'react-materialize'
 import {getFollowers, getFollows, addFollow, unFollow} from '../../actions'
 import OtherLastReviews from './OtherLastReviews/OtherLastReviews'
 import OtherBookList from './OtherBookList/OtherBookList'
@@ -89,21 +89,22 @@ class OtherProfile extends React.Component {
         return (
             <div className='container'>
                 {this.props.isLoading ?
-                    <p>...</p>
+                    <Preloader className='preloader' size="big"/>
                     :
                     this.state.isError || !this.props.isAuthenticate?
                     <Redirect to='/' />
                     :
                     <div>
-                        <h4 className='center-align'>
+                        <h4 className='center-align' >
                         {this.props.user.id.toString() === id?
                             `Welcome ${this.props.user.name}`
                             :
                             `Welcome on the ${this.state.name}'s Profile`
                         }
                         </h4>
+                        <hr style={{margin:'3rem'}} />
                         <Row style={{flexDirection:'row-reverse'}}>
-                        <Col s={12} m={6} push='m3' className='m3' style={{marginBottom:'10px'}}>
+                        <Col s={12} m={6} className='right-align' style={{marginBottom:'10px'}}>
                             {this.props.user.id.toString() === id?
                                 null
                                 :
@@ -144,7 +145,7 @@ class OtherProfile extends React.Component {
                                     <Icon>
                                         settings
                                     </Icon>
-                                    <span style={{marginLeft: '5px'}}>Manage your booklists</span>
+                                    <span className='button-text-smaller'style={{marginLeft: '5px'}}>Manage your booklists</span>
                                 </Button>
                             </Link>                        
                             :

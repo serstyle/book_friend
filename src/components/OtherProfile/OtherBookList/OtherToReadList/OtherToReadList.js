@@ -45,7 +45,7 @@ class OtherToReadList extends React.Component{
                     }
                 </div>
                 {this.state.isOpen?
-                this.props.toReadList?
+                this.props.toReadList.length?
                 <table>
                     <thead>
                         <tr>

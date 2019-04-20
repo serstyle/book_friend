@@ -22,7 +22,9 @@ class TopNavbar extends React.Component{
 					<Navbar className="black"></Navbar>
 				:
 					this.props.isAuthenticate? 
-						<Navbar isOpen={false} className="black"  alignLinks="right"  brand={<Link to='/' className="brand-logo">Book Friends</Link>}>	
+						<Navbar isOpen={false} className="black"  alignLinks="right"  brand={<Link to='/' className="brand-logo">
+							Book Friends
+							</Link>}>	
 							<Search />
 							<Link to='/' className='sidenav-close'>
 								<button className='btn-flat nav-button-item sidenav-close'>

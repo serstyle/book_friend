@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
 import {getFollows, addFollow, unFollow} from '../../actions'
-import {Row, Col, Collection, CollectionItem, Button} from 'react-materialize'
+import {Row, Col, Collection, CollectionItem, Button, Preloader} from 'react-materialize'
 export class Follows extends Component {
 
 
@@ -12,9 +12,9 @@ export class Follows extends Component {
         return (
             <CollectionItem key={id} style={{display:'flex', justifyContent:'space-between'}}>
                 <div>
-                    <span className="title">
+                    <h5 className="title">
                         {follow.name}
-                    </span>
+                    </h5>
                     <Link to={`/profile/${follow.id}`}><p>Profile</p></Link>
                 </div>
                 {this.props.follows.filter(e => e.id === follow.id).length > 0? //look if there is a the same id in the props follows state
@@ -36,7 +36,10 @@ export class Follows extends Component {
     return (
       <div className='container'>
       <h2>Follows</h2>
-      {this.props.follows.length?
+      {this.props.isPending?
+        <Preloader className='preloader' size="big"/>
+      :
+      this.props.follows.length?
         <Row>
             <Col m={12} s={12}>
                 <Collection>
@@ -55,7 +58,8 @@ export class Follows extends Component {
 const mapStateToProps = state =>{
     return{
         follows: state.follow.follows,
-        user: state.Authentication.user
+        user: state.Authentication.user,
+        isPending: state.follow.isPending
     }
 }
 const mapDispatchToProps = dispatch => {

@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import {Preloader} from 'react-materialize'
 
 class OtherLastReviews extends React.Component {
     state={
@@ -69,7 +70,7 @@ class OtherLastReviews extends React.Component {
                 )
             })
         return this.state.isPending?
-            <p>...</p>
+        <Preloader className='preloader' size="big"/>
         :
             <div>
                 <h5>{this.props.title}</h5>

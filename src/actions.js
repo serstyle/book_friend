@@ -510,6 +510,7 @@ export const addFollow = (user_id, follow_by_id) => dispatch =>{
 }
 
 export const getFollows = (follow_by_id, token) => dispatch =>{
+	dispatch({type:'GET_FOLLOWS_PENDING'})
 	fetch(`${process.env.REACT_APP_DOMAIN}follow/getfollows`, {
 		method:'POST',
 		headers: {
@@ -525,6 +526,7 @@ export const getFollows = (follow_by_id, token) => dispatch =>{
 }
 
 export const getFollowers = (user_id, token) => dispatch =>{
+	dispatch({type:'GET_FOLLOWERS_PENDING'})
 	fetch(`${process.env.REACT_APP_DOMAIN}follow/getfollowers`, {
 		method:'POST',
 		headers: {

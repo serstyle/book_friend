@@ -2,6 +2,7 @@ import React from 'react'
 import OtherToReadList from './OtherToReadList/OtherToReadList'
 import OtherReadingList from './OtherReadingList/OtherReadingList'
 import OtherFinishList from './OtherFinishList/OtherFinishList'
+import {Preloader} from 'react-materialize'
 
 
 class OtherBookList extends React.Component {
@@ -49,7 +50,7 @@ class OtherBookList extends React.Component {
     }
     render(){
         return this.state.isPending?
-            <p>...</p>
+        <Preloader className='preloader' size="big"/>
         :
             <div>
                 <h5>BookList :</h5>

@@ -10,6 +10,7 @@ import BookPage from './components/BookPage/BookPage'
 import OtherProfile from './components/OtherProfile/OtherProfile'
 import Follows from './components/Follows/Follows'
 import Followers from './components/Followers/Followers'
+import FooterPage from './components/FooterPage/FooterPage'
 
 import { loadUser } from './actions'
 
@@ -47,6 +48,7 @@ class App extends Component {
                 <Route path='/profile/:id/follows' render={(props) => <Follows {...props} />} />
                 <Route path='/profile/:id/followers' render={(props) => <Followers {...props} />} />
               </Switch>
+            <FooterPage />
           </div>
         </BrowserRouter> 
     );

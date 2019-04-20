@@ -31,7 +31,7 @@ class SearchPage extends React.Component {
 
     render(){
         const isConnect = 
-            <div className='container'>
+            <div key='search_page' className='container'>
                 {this.props.isPending?
                     (<Preloader className='preloader' size="big" />)
                     :

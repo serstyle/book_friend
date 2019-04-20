@@ -15,7 +15,14 @@ class BookReview extends React.Component{
                 return(
                         <tr id={review.id} key={review.id}>
                             <td>
-                                <Link to={`/profile/${review.userid}`}>{review.name}</Link>
+                                <Link to={`/profile/${review.userid}`}>
+                                {
+                                    review.userid === this.props.user.id?
+                                    <span>{review.name}<span className='discret'> (YOU)</span></span>
+                                    :
+                                    review.name
+                                }
+                                </Link>
                             </td>
                             <td>
                                 {review.review}

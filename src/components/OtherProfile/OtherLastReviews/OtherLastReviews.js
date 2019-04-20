@@ -8,6 +8,9 @@ class OtherLastReviews extends React.Component {
     }
     componentDidMount(){
         const id = this.props.id
+        this.props.reviews?
+        this.setState({reviews:this.props.reviews, isPending:false})
+        :
         fetch(`${process.env.REACT_APP_DOMAIN}otherprofile/reviews`, {
             method:'POST',
             headers: {
@@ -43,6 +46,20 @@ class OtherLastReviews extends React.Component {
                 review.booktitle
                 return(
                     <tr key={review.id}>
+                        {this.props.reviews?
+                        <td>
+                            <Link to={`/profile/${review.userid}`}>
+                                {
+                                    review.userid === this.props.user.id?
+                                    <span>{review.name}<span className='discret'> (YOU)</span></span>
+                                    :
+                                    review.name
+                                }
+                                </Link>
+                        </td>
+                        :
+                        null
+                        }
                         <td><Link to={`/book/${review.bookid}`}>{booktitle}</Link></td>
                         <td>{review.review}</td>
                         <td>{review.note}</td>
@@ -58,6 +75,11 @@ class OtherLastReviews extends React.Component {
                 <table>
                     <thead>
                         <tr>
+                            {this.props.reviews?
+                            <th>Author</th>
+                            :
+                            null
+                            }
                             <th>Book</th>
                             <th>Review</th>
                             <th>Note</th>

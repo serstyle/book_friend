@@ -45,6 +45,7 @@ class OtherReadingList extends React.Component{
                     }
                 </div>
                 {this.state.isOpen?
+                this.props.readingList.length?
                 <table>
                     <thead>
                         <tr>
@@ -56,6 +57,8 @@ class OtherReadingList extends React.Component{
                         {bookReading}
                     </tbody>
                 </table>
+                :
+                <p className='discret'>No books here</p>
                 :
                 null    
                 }

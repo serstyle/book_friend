@@ -21,7 +21,7 @@ class BookListFinish extends React.Component{
                             )
                         })
                         :
-                        <p style={{'textAlign': 'center'}}>Add book from your Currently Reading list !</p>
+                        <p className='discret' style={{'textAlign': 'center'}}>Add book from your Currently Reading list !</p>
         )
             return(
                 

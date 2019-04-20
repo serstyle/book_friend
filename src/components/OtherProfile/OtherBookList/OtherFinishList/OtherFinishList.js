@@ -45,6 +45,7 @@ class OtherFinishList extends React.Component{
                     }
                 </div>
                 {this.state.isOpen?
+                this.props.finishList.length?
                 <table>
                     <thead>
                         <tr>
@@ -56,6 +57,8 @@ class OtherFinishList extends React.Component{
                         {bookFinish}
                     </tbody>
                 </table>
+                :
+                <p className='discret'>No books here</p>
                 :
                 null    
                 }

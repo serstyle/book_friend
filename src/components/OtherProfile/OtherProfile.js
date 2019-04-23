@@ -16,14 +16,12 @@ class OtherProfile extends React.Component {
     }
     addFollow = () => {
         this.props.addFollow(this.props.match.params.id, this.props.user.id)
-        console.log(this.props.follow)
         this.setState(prevState => ({
             followers: prevState.followers+1
         }))
     }
     unFollow = () => {
         this.props.unFollow(this.props.match.params.id, this.props.user.id)
-        console.log(this.props.follow)
         this.setState(prevState => ({
             followers: prevState.followers-1
         }))
@@ -104,20 +102,20 @@ class OtherProfile extends React.Component {
                         </h4>
                         <hr style={{margin:'3rem'}} />
                         <Row style={{flexDirection:'row-reverse'}}>
-                        <Col s={12} m={6} className='right-align' style={{marginBottom:'10px'}}>
+                        <Col s={12} m={6} className='right-align'>
                             {this.props.user.id.toString() === id?
                                 null
                                 :
                                 <div>
                                 {this.props.follow.follows.filter(e => e.id.toString() === id).length > 0? //look if there is a the same id in the props follows state
                                     <Button
-                                        onClick={this.unFollow}
+                                        onClick={this.props.follow.isTriggerFollowPending?null:this.unFollow}
                                     >
                                         UNFOLLOW
                                     </Button>
                                 :
                                     <Button
-                                        onClick={this.addFollow}
+                                        onClick={this.props.follow.isTriggerFollowPending?null:this.addFollow}
                                     >
                                         FOLLOW
                                     </Button>
@@ -158,7 +156,7 @@ class OtherProfile extends React.Component {
                                 <OtherBookList id={id}/>
                             </Col>
                             <Col s={12} m={12} l={6} className='otherProfileDiv'>
-                                <OtherLastReviews title={this.state.name + "'s last reviews"} id={id}/>
+                                <OtherLastReviews title={this.props.user.id.toString() === id?'Your last reviews':this.state.name + "'s last reviews"} id={id}/>
                             </Col>
                         </Row>
                     </div>

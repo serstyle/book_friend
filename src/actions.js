@@ -495,6 +495,7 @@ export const delReview = (reviewid, email) => (dispatch) => {
 //FOLLOW / FOLLOWER
 
 export const addFollow = (user_id, follow_by_id) => dispatch =>{
+	dispatch({type:'TRIGGER_FOLLOW_PENDING'})
 	fetch(`${process.env.REACT_APP_DOMAIN}follow/addfollow`, {
 		method:'POST',
 		headers: {
@@ -542,6 +543,7 @@ export const getFollowers = (user_id, token) => dispatch =>{
 }
 
 export const unFollow = (user_id, follow_by_id) => dispatch =>{
+	dispatch({type:'TRIGGER_FOLLOW_PENDING'})
 	fetch(`${process.env.REACT_APP_DOMAIN}follow/unfollow`, {
 		method:'POST',
 		headers: {

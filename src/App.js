@@ -48,7 +48,7 @@ class App extends Component {
                 <Route path='/profile/:id/follows' render={(props) => <Follows {...props} />} />
                 <Route path='/profile/:id/followers' render={(props) => <Followers {...props} />} />
               </Switch>
-            <FooterPage />
+            {/* <FooterPage /> */}
           </div>
         </BrowserRouter> 
     );

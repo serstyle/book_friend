@@ -44,7 +44,7 @@ class BookPage extends React.Component{
                                         title={book.volumeInfo.title}
                                         authors={book.volumeInfo.authors?book.volumeInfo.authors[0]:'Unknow'}
                                         image={book.volumeInfo.imageLinks?book.volumeInfo.imageLinks.smallThumbnail:'/media/book_cover.jpg'}
-                                        description={book.volumeInfo.description?book.volumeInfo.description:'No description'}
+                                        description={book.description?book.description:'No description'}
                                         />
                                         </Col>
                                             <Col s={12} m={6} l={6}> 

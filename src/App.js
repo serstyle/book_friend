@@ -10,7 +10,7 @@ import BookPage from './components/BookPage/BookPage'
 import OtherProfile from './components/OtherProfile/OtherProfile'
 import Follows from './components/Follows/Follows'
 import Followers from './components/Followers/Followers'
-import FooterPage from './components/FooterPage/FooterPage'
+// import FooterPage from './components/FooterPage/FooterPage'
 
 import { loadUser } from './actions'
 

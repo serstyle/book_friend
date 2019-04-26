@@ -11,8 +11,8 @@ class BookToRead extends React.Component{
             this.props.isPending || this.props.err?
                 <Preloader className='preloader' size="big" />
             :
-                this.props.book.volumeInfo.description?
-                    this.props.book.volumeInfo.description
+                this.props.book.description?
+                    this.props.book.description
                 :
                     <span>There is no description</span>)
         return(

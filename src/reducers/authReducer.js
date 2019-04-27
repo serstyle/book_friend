@@ -17,10 +17,11 @@ export const Authentication = (state=initialStateAuthentication, action={}) =>{
 	switch(action.type){
 		case 'LOGOUT_PENDING':
 		case 'USER_LOADING':
-			return {...state, isLoading:true, isError: false}
+			return {...state, isLoading:true, isError: false, isWrongPassword:false}
 		case 'USER_LOADED':
 			return{...state, isAuthenticate:true, user:action.payload, isLoading:false, isError: false}
-
+		case 'REGISTER_PENDING':
+			return {...state, isError: false, isWrongPassword:false}
 		case 'REGISTER_SUCCESS':
 		case LOGIN_SUCCESS:
 			localStorage.setItem('token', action.payload.token)

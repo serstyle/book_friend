@@ -369,6 +369,7 @@ export const logout = () => (dispatch, getState) =>{
 //   REGISTER_FAIL
 
 export const authRegister = (user) => (dispatch) => {
+	dispatch({type:'REGISTER_PENDING'})
 	if(user.password !== user.confirmPassword){
 		return dispatch({type:'REGISTER_NOT_CONFIRM'})
 	}

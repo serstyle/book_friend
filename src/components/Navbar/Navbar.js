@@ -60,7 +60,7 @@ class TopNavbar extends React.Component{
 							<RegisterModal  
 								className='sidenav-close' 
 								buttonRegisterStyle={'btn-flat nav-button-item sidenav-close'} 
-								mailId={'nav_register_email_id'} passwordId={'nav_register_password_id'} nameId={'nav_register_name_id'}
+								mailId={'nav_register_email_id'} confirmPasswordId={'nav_register_confirmPassword_id'} passwordId={'nav_register_password_id'} nameId={'nav_register_name_id'}
 							/>							
 						</Navbar>
 				}

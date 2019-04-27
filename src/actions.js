@@ -368,7 +368,10 @@ export const logout = () => (dispatch, getState) =>{
 //   REGISTER_SUCCESS,
 //   REGISTER_FAIL
 
-export const authRegister = (user) => (dispatch) => (
+export const authRegister = (user) => (dispatch) => {
+	if(user.password !== user.confirmPassword){
+		return dispatch({type:'REGISTER_NOT_CONFIRM'})
+	}
 	fetch(`${process.env.REACT_APP_DOMAIN}register`, {
 		method: 'POST',
 		headers: {
@@ -396,8 +399,8 @@ export const authRegister = (user) => (dispatch) => (
 			})
 			.catch(err => dispatch({type:'REGISTER_FAIL', payload:'wrong credentials'}))
 		})
-	 
-)
+	 }
+
 
 
 export const updateUser = (user) => (dispatch, getState) => {

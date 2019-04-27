@@ -15,7 +15,7 @@ class HomeVisitor extends React.Component {
                     marginTop:'3rem'
                     }}>
                     <SigninModal buttonSigninStyle={'btn'} emailId={'button_signin_email_id'} passwordId={'button_signin_password_id'}/>
-                    <RegisterModal buttonRegisterStyle={'btn'} emailId={'button_register_email_id'} passwordId={'button_register_password_id'} nameId={'button_register_name_id'}/>
+                    <RegisterModal buttonRegisterStyle={'btn'} emailId={'button_register_email_id'} confirmPasswordId={'button_register_confirmPassword_id'} passwordId={'button_register_password_id'} nameId={'button_register_name_id'}/>
                 </div>
             </div>
         )

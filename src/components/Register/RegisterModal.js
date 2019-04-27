@@ -9,7 +9,7 @@ import {close_modal} from '../../actions'
 class RegisterModal extends React.Component{
     render(){
         return(
-            <Modal 
+        <Modal 
             id='register' 
             header='Register'
             options={{
@@ -22,7 +22,7 @@ class RegisterModal extends React.Component{
                 </button>
                 } 
             >
-            <Register  emailId={this.props.emailId} passwordId={this.props.passwordId} nameId={this.props.nameId}/> 
+            <Register  emailId={this.props.emailId} passwordId={this.props.passwordId} confirmPasswordId={this.props.confirmPasswordId} nameId={this.props.nameId}/> 
         </Modal>
         )
     }

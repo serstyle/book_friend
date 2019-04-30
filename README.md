@@ -8,7 +8,7 @@ It's also responsive for mobile users.
 
 The front end is deploy on netlify and the back end on heroku.
 
-**Live on :** https://bookfriends.netlify.com/ 
+**Live on :** https://bookfriends.netlify.com/ the first load might be long because I use the free tier on heroku
 
 **backend repo :** https://github.com/serstyle/book-friends-api
 

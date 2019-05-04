@@ -10,6 +10,7 @@ import BookPage from './components/BookPage/BookPage'
 import OtherProfile from './components/OtherProfile/OtherProfile'
 import Follows from './components/Follows/Follows'
 import Followers from './components/Followers/Followers'
+import People from './components/People/People'
 // import FooterPage from './components/FooterPage/FooterPage'
 
 import { loadUser } from './actions'
@@ -41,6 +42,7 @@ class App extends Component {
               <Switch className='container'>
                 <Route exact path='/' render={(props) => <Home {...props} bookList={this.props.bookList}  />} />
                 <Route exact path='/profile' render={(props) => <Profile {...props} />} />
+                <Route exact path='/users' render={(props) => <People {...props} />} />
                 <Route path='/search' render={(props) => <SearchPage {...props} />} />
                 <Route path='/settings' render={(props) => <Settings {...props} />} />
                 <Route path='/book/:book' render={(props) => <BookPage {...props} />} />

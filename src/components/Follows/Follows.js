@@ -8,7 +8,6 @@ export class Follows extends Component {
 
   render() {
       const follows = this.props.follows.map((follow, id)=>{
-        console.log('test')
         return (
             <CollectionItem key={id} style={{display:'flex', justifyContent:'space-between'}}>
                 <div>

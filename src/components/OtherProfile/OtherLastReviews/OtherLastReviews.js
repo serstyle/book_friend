@@ -27,7 +27,6 @@ class OtherLastReviews extends React.Component {
         const id = this.props.id
         if(prevProps.id !== id){
             this.setState({isPending:true})
-            console.log('trigger')
             fetch(`${process.env.REACT_APP_DOMAIN}otherprofile/reviews`, {
                 method:'POST',
                 headers: {

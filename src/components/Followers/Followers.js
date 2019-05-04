@@ -10,7 +10,6 @@ export class Followers extends Component {
     }
   render() {
       const followers = this.props.followers.map((follower, id)=>{
-        console.log('test')
         return (
             <CollectionItem key={id} style={{display:'flex', justifyContent:'space-between'}}>
                 <div>

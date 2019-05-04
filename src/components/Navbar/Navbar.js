@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom';
-import { Icon, Navbar } from 'react-materialize';
+import { Icon, Navbar, SideNav } from 'react-materialize';
 
 import SigninModal from '../Signin/SigninModal'
 import RegisterModal from '../Register/RegisterModal'
@@ -22,6 +22,7 @@ class TopNavbar extends React.Component{
 					<Navbar className="black"></Navbar>
 				:
 					this.props.isAuthenticate? 
+					<div>
 						<Navbar isOpen={false} className="black"  alignLinks="right"  brand={<Link to='/' className="brand-logo">
 							Book Friends
 							</Link>}>	
@@ -49,7 +50,8 @@ class TopNavbar extends React.Component{
 								</button>
 							</Link>
 						</Navbar>
-					:
+						</div>
+					:	<div>
 						<Navbar className="black"  alignLinks="right" brand={<Link to='/' className="brand-logo">Book Friends</Link>}>
 							<SigninModal 
 								className='sidenav-close' 
@@ -63,6 +65,8 @@ class TopNavbar extends React.Component{
 								mailId={'nav_register_email_id'} confirmPasswordId={'nav_register_confirmPassword_id'} passwordId={'nav_register_password_id'} nameId={'nav_register_name_id'}
 							/>							
 						</Navbar>
+						<SideNav></SideNav>
+					</div>
 				}
 			</div>
 		)

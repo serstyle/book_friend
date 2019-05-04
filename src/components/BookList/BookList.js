@@ -15,7 +15,6 @@ import Book from '../Book/Book'
 
 class BookList extends React.Component{
 	render(){
-	console.log(this.props.bookList)
 	const books = this.props.bookList[0].id.length?
 		this.props.bookList.map (book =>{
 			return(<Book

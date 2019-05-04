@@ -43,7 +43,6 @@ class OtherProfile extends React.Component {
         })
         .then(res => res.json())
         .then(data =>{
-            console.log(data)
             data === 'err'?
             this.setState({isError:true})
             :
@@ -58,7 +57,6 @@ class OtherProfile extends React.Component {
     componentDidUpdate(prevProps){
         const id = this.props.match.params.id
         if(prevProps.match.params.id !== id){
-            console.log('trigger')
             fetch(`${process.env.REACT_APP_DOMAIN}otherprofile`, {
                 method:'POST',
                 headers: {
@@ -69,7 +67,6 @@ class OtherProfile extends React.Component {
             })
             .then(res => res.json())
             .then(data =>{
-                console.log(data)
                 data === 'err'?
                 this.setState({isError:true})
                 :

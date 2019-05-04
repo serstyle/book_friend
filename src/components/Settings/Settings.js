@@ -48,7 +48,6 @@ class Settings extends React.Component {
     }
     inputChange = (e) =>{
         this.setState({[e.target.id]:e.target.value})
-        console.log(this.state)
     }
 
     render(){

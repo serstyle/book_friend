@@ -12,7 +12,6 @@ class AddReview extends React.Component{
         e.preventDefault()
         const {bookid, userid, booktitle} = this.props
         const data = {...this.state, bookid, userid, booktitle}
-        console.log(data)
         this.props.addReview(data)
         this.props.addReviewToggleContainer()
     }

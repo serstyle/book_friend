@@ -18,8 +18,7 @@ export const onSubmitBook = () => (dispatch, getState) => {
 	dispatch({type:REQUEST_BOOK_PENDING})
 	fetch("https://www.googleapis.com/books/v1/volumes?q=" + getState().searchChange.input + '&maxResults=10') //getstate to take a state from an other reducer
     .then(res => res.json())
-    .then(data => {dispatch({type:REQUEST_BOOK_SUCCESS, payload:{data:data.items, search:getState().searchChange.input}}) 
-    	console.log(data)})
+    .then(data => {dispatch({type:REQUEST_BOOK_SUCCESS, payload:{data:data.items, search:getState().searchChange.input}})})
     .catch(err => dispatch({type:REQUEST_BOOK_FAILED, payload:err}))
 }
 
@@ -93,7 +92,6 @@ const getUserBookList = (email, token) => (dispatch, getState) => {
 	})
 	.then(res => res.json())
 	.then(data => {
-		console.log('booklist :', data)
 		dispatch({type:'GET_USER_BOOKLIST_SUCCESS', payload: data})
 	})
 }
@@ -170,7 +168,6 @@ const getUserBookListReading = (email, token) => (dispatch, getState) => {
 	})
 	.then(res => res.json())
 	.then(data => {
-		console.log('booklist :', data)
 		dispatch({type:'GET_USER_BOOKLIST_READING_SUCCESS', payload: data})
 	})
 }
@@ -247,7 +244,6 @@ const getUserBookListFinish = (email, token) => (dispatch, getState) => {
 	})
 	.then(res => res.json())
 	.then(data => {
-		console.log('booklist :', data)
 		dispatch({type:'GET_USER_BOOKLIST_FINISH_SUCCESS', payload: data})
 	})
 }
@@ -308,7 +304,6 @@ export const authSignin = (user) => (dispatch) => {
 				dispatch(getFollowers(data.id, token))
 				dispatch(getAllReviews(data.id, token))
 				dispatch({type:LOGIN_SUCCESS, payload: {data, token} })
-				console.log(data)
 			})
 			.catch(err => dispatch({type:'LOGIN_FAIL', payload:'wrong credentials'}))
 		})
@@ -340,7 +335,6 @@ export const loadUser = () => (dispatch) =>{
 		dispatch(getFollowers(data.id))
 		dispatch(getAllReviews(data.id))
 		dispatch({type:'USER_LOADED', payload: data })
-		console.log(data)
 	})
 	.catch(err => dispatch({type:'AUTH_ERROR', payload:'wrong credentials'}))
 }
@@ -396,7 +390,6 @@ export const authRegister = (user) => (dispatch) => {
 					return dispatch({type:'REGISTER_FAIL', payload:'wrong credentials'})
 				}
 				dispatch({type:'REGISTER_SUCCESS', payload: {data, token} })
-				console.log(data)
 			})
 			.catch(err => dispatch({type:'REGISTER_FAIL', payload:'wrong credentials'}))
 		})
@@ -456,7 +449,6 @@ export const addReview = (data) => (dispatch) => {
 }
 
 export const getReviews = (bookid) => (dispatch) => {
-	console.log(bookid)
 	dispatch({type:'GET_REVIEWS_PENDING'})
 	fetch(`${process.env.REACT_APP_DOMAIN}getreview`, {
 		method:'POST',

@@ -13,7 +13,6 @@ const initialStateAuthentication = {
 
 
 export const Authentication = (state=initialStateAuthentication, action={}) =>{
-	console.log(action)
 	switch(action.type){
 		case 'LOGOUT_PENDING':
 		case 'USER_LOADING':

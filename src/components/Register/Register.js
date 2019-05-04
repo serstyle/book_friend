@@ -11,7 +11,6 @@ class Register extends React.Component {
 	}
 	onSubmit = e =>{
 		e.preventDefault()
-		console.log(this.state)
 		this.props.authRegister(this.state)
 	}
 	render(){

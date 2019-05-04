@@ -31,7 +31,6 @@ class OtherBookList extends React.Component {
     componentDidUpdate(prevProps){
         const id = this.props.id
         if(prevProps.id !== id){
-            console.log('trigger')
             this.setState({isPending:true})
             const bookLists = ['toreadbooklist', 'readingbooklist', 'finishbooklist']
             bookLists.map(bookList => {

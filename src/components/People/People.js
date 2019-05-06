@@ -53,6 +53,7 @@ export class People extends Component {
             :
             this.props.isAuthenticate? //need to fix if refresh go at home
                 !this.props.isPending && <Row className='container'>
+                    <h2>Search other users here !</h2>
                     <SearchPeople userSearch={this.userSearch}/>
                     <Col m={12} s={12}>
                         <Collection>

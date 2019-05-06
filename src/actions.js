@@ -29,8 +29,11 @@ export const onSubmitBookById = (bookid) => (dispatch) => {
     .then(data => {
 			if(data.error){
 				dispatch({type:'REQUEST_BOOKID_FAIL'})
-			}else{
+			}else if(data.volumeInfo.description){
 				dispatch({type:'REQUEST_BOOKID_SUCCESS', payload:{...data, description:data.volumeInfo.description.replace(/<[^>]*>/g, '')}})
+			}
+			else{
+				dispatch({type:'REQUEST_BOOKID_SUCCESS', payload:data})
 			}
 		})
     .catch(err => dispatch({type:'REQUEST_BOOKID_FAIL', payload:err}))

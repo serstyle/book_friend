@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom';
-import { Icon, Navbar, SideNav } from 'react-materialize';
+import { Icon, Navbar } from 'react-materialize';
 
 import SigninModal from '../Signin/SigninModal'
 import RegisterModal from '../Register/RegisterModal'

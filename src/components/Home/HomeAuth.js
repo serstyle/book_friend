@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-
+import {Link} from 'react-router-dom'
 import{getAllReviews} from '../../actions'
 import {Preloader} from 'react-materialize';
 import OtherLastReviews from '../OtherProfile/OtherLastReviews/OtherLastReviews'
@@ -16,7 +16,8 @@ const mapStateToProps = state =>{
       isLoading: state.Authentication.isLoading,
       user: state.Authentication.user,
       isPendingReviews:state.getAllReviews.isPending,
-      reviews: state.getAllReviews.reviews
+      reviews: state.getAllReviews.reviews,
+      follow: state.follow.follows
     }
   }
 class HomeAuth extends React.Component {
@@ -41,6 +42,7 @@ class HomeAuth extends React.Component {
                             <OtherLastReviews reviews={this.props.reviews} user={this.props.user} title={'The last 10 reviews from you and people that you follow'} id={this.props.user.id}/>
                         </div>
                     }
+                            <p className='discret'>See all users <Link to='/users'>here</Link></p>
             </div>
         )
     }

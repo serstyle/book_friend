@@ -97,6 +97,9 @@ input{
   left: 50%;
 }
 
+tr:nth-child(even) {background: #f5f5f5}
+tr:nth-child(odd) {background: #FFF}
+
 .modal{
   min-height: 20%
 }

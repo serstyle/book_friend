@@ -389,6 +389,7 @@ export const authRegister = (user) => (dispatch) => {
 				if(data === 'unauthorized'){
 					return dispatch({type:'REGISTER_FAIL', payload:'wrong credentials'})
 				}
+				dispatch(getFollows(data.id, token))
 				dispatch({type:'REGISTER_SUCCESS', payload: {data, token} })
 			})
 			.catch(err => dispatch({type:'REGISTER_FAIL', payload:'wrong credentials'}))

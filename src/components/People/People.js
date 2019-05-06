@@ -2,20 +2,29 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {Link, Redirect} from 'react-router-dom'
 import {getFollows, addFollow, unFollow} from '../../actions'
-import {Row, Col, Collection, CollectionItem, Button} from 'react-materialize'
+import {Row, Col, Collection, CollectionItem, Button, Preloader} from 'react-materialize'
+import SearchPeople from './SearchPeople'
 export class People extends Component {
     state={
         users:[]
     }
+
     componentDidMount(){
         fetch(`${process.env.REACT_APP_DOMAIN}users`)
         .then(res => res.json())
         .then(data => this.setState({users:data}))
     }
+
+    userSearch = (users) =>{
+        console.log('trigger')
+        this.setState({users: users})
+
+    }
   render() {
-      const users = this.state.users.map(user => {
+      const users = !this.props.isLoading && this.state.users.map(user => {
           return (
-            user.id !== this.props.user.id && <CollectionItem key={user.id} style={{display:'flex', justifyContent:'space-between'}}>
+            user.id !== this.props.user.id && 
+            <CollectionItem key={user.id} style={{display:'flex', justifyContent:'space-between'}}>
             <div>
                 <h5 className="title">
                     {user.name}
@@ -39,16 +48,20 @@ export class People extends Component {
           )
       })
     return (
-        this.props.isAuthenticate? //need to fix if refresh go at home
-        !this.props.isPending && <Row className='container'>
-            <Col m={12} s={12}>
-                <Collection>
-                    {users}
-                </Collection>
-            </Col>
-        </Row>
-        :
-        <Redirect to='/' />
+        this.props.isLoading ?
+            <Preloader className='preloader' size="big" />
+            :
+            this.props.isAuthenticate? //need to fix if refresh go at home
+                !this.props.isPending && <Row className='container'>
+                    <SearchPeople userSearch={this.userSearch}/>
+                    <Col m={12} s={12}>
+                        <Collection>
+                            {users}
+                        </Collection>
+                    </Col>
+                </Row>
+                :
+                <Redirect to='/' />
     )
   }
 }
@@ -57,7 +70,7 @@ const mapStateToProps = state =>{
     return{
         follows: state.follow.follows,
         user: state.Authentication.user,
-        // isUPending: state.Authentication.isLoading,
+        isLoading: state.Authentication.isLoading,
         isAuthenticate: state.Authentication.isAuthenticate,
         isPending: state.follow.isPending
     }

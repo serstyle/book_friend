@@ -6,17 +6,17 @@ import {Row, Col, Collection, CollectionItem, Button, Preloader} from 'react-mat
 import SearchPeople from './SearchPeople'
 export class People extends Component {
     state={
-        users:[]
+        users:[],
+        isPending:true
     }
 
     componentDidMount(){
         fetch(`${process.env.REACT_APP_DOMAIN}users`)
         .then(res => res.json())
-        .then(data => this.setState({users:data}))
+        .then(data => this.setState({users:data, isPending:false}))
     }
 
     userSearch = (users) =>{
-        console.log('trigger')
         this.setState({users: users})
 
     }
@@ -52,13 +52,26 @@ export class People extends Component {
             <Preloader className='preloader' size="big" />
             :
             this.props.isAuthenticate? //need to fix if refresh go at home
-                !this.props.isPending && <Row className='container'>
-                    <h2>Search other users here !</h2>
-                    <SearchPeople userSearch={this.userSearch}/>
+                !this.props.isPending && 
+                <Row className='container'>
+                    <Col l={12}>
+                    <h2 className='center-align'>Search other users here !</h2>
+                    </Col>
+                        <SearchPeople userSearch={this.userSearch}/>
                     <Col m={12} s={12}>
-                        <Collection>
-                            {users}
-                        </Collection>
+                    {this.state.isPending?
+                    <div style={{position:'relative'}}> 
+                        <Preloader className='preloader' size="big" />
+                    </div>
+                    :
+                        this.state.users.length?
+                            <Collection>
+                                {users}
+                            </Collection>
+                            :
+                            <p className='discret center-align'>There are no users with that name</p>
+                            
+                    }
                     </Col>
                 </Row>
                 :

@@ -40,9 +40,10 @@ class HomeAuth extends React.Component {
                             <h6>You have read {this.props.bookListFinish.length} {this.props.bookListFinish.length === 1? 'book': 'books'} !</h6>
                             <hr style={{'margin':'30px'}}/>
                             <OtherLastReviews reviews={this.props.reviews} user={this.props.user} title={'The last 10 reviews from you and people that you follow'} id={this.props.user.id}/>
+                            
+                            <p style={{'marginTop':'50px'}} className='discret'>See all users <Link to='/users'>here</Link></p>
                         </div>
                     }
-                            <p className='discret'>See all users <Link to='/users'>here</Link></p>
             </div>
         )
     }
